@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColorConsoleLogger", "ColorConsoleLogger.csproj", "{A335523E-4760-4F65-AE06-7697C13FED17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONWrapper", "JSONWrapper.csproj", "{96029708-B35C-48AD-909C-1AB49CB08E96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A335523E-4760-4F65-AE06-7697C13FED17}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{A335523E-4760-4F65-AE06-7697C13FED17}.Debug|Any CPU.Build.0 = Release|Any CPU
-		{A335523E-4760-4F65-AE06-7697C13FED17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A335523E-4760-4F65-AE06-7697C13FED17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96029708-B35C-48AD-909C-1AB49CB08E96}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{96029708-B35C-48AD-909C-1AB49CB08E96}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{96029708-B35C-48AD-909C-1AB49CB08E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96029708-B35C-48AD-909C-1AB49CB08E96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E6E6A421-42F6-4CB6-B06A-BEBB16A6AEAD}
+		SolutionGuid = {B40FC041-2803-4C06-A117-B00C5824623E}
 	EndGlobalSection
 EndGlobal

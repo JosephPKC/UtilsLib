@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<OutputType>Library</OutputType>
+	<TargetFramework>net8.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+	<PackageReference Include="LiteDB" Version="5.0.21" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<Reference Include="ColorConsoleLogger">
+	  <HintPath>..\ColorConsoleLogger\obj\Release\net8.0\ColorConsoleLogger.dll</HintPath>
+	</Reference>
+  </ItemGroup>
+
+  <Target Name="AfterBuild">
+	<Copy SourceFiles="$(ProjectDir)\obj\Release\net8.0\LiteDbWrapper.dll" DestinationFolder="..\..\..\FITDManager\libs" SkipUnchangedFiles="false" />
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy \y \d &quot;$(ProjectDir)\obj\Release\net8.0\LiteDbWrapper.dll&quot; " />
+  </Target>
+
+</Project>

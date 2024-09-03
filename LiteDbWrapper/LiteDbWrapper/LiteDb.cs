@@ -11,19 +11,19 @@ namespace LiteDbWrapper
         /* Public Access Methods */
         public int GetCount(string pColName)
         {
-            log.Info($"Get Count {pColName}.");
+            log.Info($"BEGIN: Get Count {pColName}.");
 
             ILiteCollection<BsonDocument> col = GetCol<BsonDocument>(pColName);
             int count = col.Count();
 
-            log.Debug($"Get Count {pColName}: {count}.");
+            log.Debug($"END: Get Count {pColName}: {count}.");
             return count;
         }
 
         public IEnumerable<TModel> GetAll<TModel>(string pColName, string pWhere = "", string pOrder = "", int pLimit = 0) where TModel : LiteDbModel
         {
             string queryStr = LiteDbStringBuilder.BuildQueryString(pColName, pWhere, pOrder, pLimit);
-            log.Info($"Get All {queryStr}.");
+            log.Info($"BEGIN: Get All {queryStr}.");
 
             ILiteCollection<TModel> col = GetCol<TModel>(pColName);
             ILiteQueryable<TModel> query = col.Query();
@@ -41,37 +41,36 @@ namespace LiteDbWrapper
             ILiteQueryableResult<TModel> result = pLimit > 0 ? query : query.Limit(pLimit);
             IEnumerable<TModel> resultList = result.ToList();
 
-            log.Debug($"Get All {queryStr}: {LiteDbStringBuilder.BuildListString(resultList)}.");
+            log.Debug($"END: Get All {queryStr}: {LiteDbStringBuilder.BuildListString(resultList)}.");
             return resultList;
         }
 
         public TModel? GetFirst<TModel>(string pColName, string pExp) where TModel : LiteDbModel
         {
             string queryStr = LiteDbStringBuilder.BuildQueryString(pColName, pExp, "", 0);
-            log.Info($"Get First {queryStr}.");
+            log.Info($"BEGIN: Get First {queryStr}.");
 
             ILiteCollection<TModel> col = GetCol<TModel>(pColName);
             TModel? result = col.FindOne(BsonExpression.Create(pExp));
 
-            log.Debug($"Get First {queryStr}: {result}.");
+            log.Debug($"END: Get First {queryStr}: {result}.");
             return result;
         }
 
         public int DeleteAll<TModel>(string pColName) where TModel : LiteDbModel
         {
-            log.Info($"Delete All {pColName}.");
+            log.Info($"BEGIN: Delete All {pColName}.");
 
             ILiteCollection<TModel> col = GetCol<TModel>(pColName);
             int result = col.DeleteAll();
 
-            log.Debug($"Delete All {pColName}: {result}.");
+            log.Debug($"END: Delete All {pColName}: {result}.");
             return result;
         }
 
-        public IEnumerable<BsonValue> Insert<TModel>(string pColName, IEnumerable<TModel> pToAdd, Action<TModel>? pPreProcess = null, Action<ILiteCollection<TModel>>? pPostProcessCol = null) where TModel : LiteDbModel
+        public void Insert<TModel>(string pColName, IEnumerable<TModel> pToAdd, Action<TModel>? pPreProcess = null) where TModel : LiteDbModel
         {
             string listStr = LiteDbStringBuilder.BuildListString(pToAdd);
-            log.Info($"Insert {pColName}: {listStr}.");
 
             ICollection<BsonValue> docIds = [];
             ILiteCollection<TModel> col = GetCol<TModel>(pColName);
@@ -83,31 +82,25 @@ namespace LiteDbWrapper
                     docIds.Add(result);
                 }
             }
-            pPostProcessCol?.Invoke(col);
-
-            log.Debug($"Insert {pColName}: {listStr}: {LiteDbStringBuilder.BuildListString(docIds)}.");
-            return docIds;
         }
 
-        public BsonValue? Insert<TModel>(string pColName, TModel pToAdd, Action<TModel>? pPreProcess = null) where TModel : LiteDbModel
+        public void Insert<TModel>(string pColName, TModel pToAdd, Action<TModel>? pPreProcess = null) where TModel : LiteDbModel
         {
-            log.Info($"Insert {pColName}: {pToAdd}.");
+            log.Info($"BEGIN: Insert {pColName}: {pToAdd}.");
 
             ILiteCollection<TModel> col = GetCol<TModel>(pColName);
             BsonValue? result = Insert(col, pToAdd, pPreProcess);
 
-            log.Debug($"Insert {pColName}: {pToAdd}: {result}.");
-            return result;
+            log.Debug($"END: Insert {pColName}: {pToAdd}: {result}.");
         }
 
-        public ILiteCollection<BsonDocument> Create(string pColName, BsonAutoId pAutoId = BsonAutoId.ObjectId)
+        public void Create(string pColName)
         {
-            log.Info($"Create {pColName}.");
+            log.Info($"BEGIN: Create {pColName}.");
 
-            ILiteCollection<BsonDocument> result = _db.GetCollection(pColName, pAutoId);
+            ILiteCollection<BsonDocument> result = _db.GetCollection(pColName);
   
-            log.Debug($"Create {pColName}: {result}.");
-            return result;
+            log.Debug($"END: Create {pColName}: {result}.");
         }
 
         #region "Collection Helpers"
