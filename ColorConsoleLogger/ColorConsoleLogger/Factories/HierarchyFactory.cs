@@ -7,7 +7,7 @@ namespace ColorConsoleLogger.Factories
 {
     internal static class HierarchyFactory
     {
-        public static void SetHierarchy(Level pLevel, IEnumerable<IAppender> pAppenders)
+        public static void SetHierarchy(Level pLevel, ICollection<IAppender> pAppenders)
         {
             Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
             hierarchy.Root.Level = pLevel;

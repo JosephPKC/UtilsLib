@@ -6,7 +6,7 @@ namespace ColorConsoleLogger.Factories
 {
     internal static class AppenderFactory
     {
-        public static ManagedColoredConsoleAppender GetManagedColoredConsoleAppender(PatternLayout pLayout, IEnumerable<LevelColors> pLevels)
+        public static ManagedColoredConsoleAppender GetManagedColoredConsoleAppender(PatternLayout pLayout, ICollection<LevelColors> pLevels)
         {
             ManagedColoredConsoleAppender appender = new()
             {

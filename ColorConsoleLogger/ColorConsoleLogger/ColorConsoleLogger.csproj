@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y /d &quot;$(ProjectDir)\obj\Release\net8.0\ColorConsoleLogger.dll&quot; &quot;..\..\..\FITDManager\libs\&quot;" />
+    <Exec Command="xcopy /y /d &quot;$(ProjectDir)\obj\Release\net8.0\ColorConsoleLogger.dll&quot; &quot;..\..\bin\&quot;" />
   </Target>
 
 </Project>

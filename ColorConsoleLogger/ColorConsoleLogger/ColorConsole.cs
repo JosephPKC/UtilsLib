@@ -27,7 +27,7 @@ namespace ColorConsoleLogger
 
             ICollection<IAppender> appenders = [];
             // Managed Colored Console Appender
-            IEnumerable<LevelColors> colors = LevelColorsFactory.GetLevelColors(levels);
+            ICollection<LevelColors> colors = LevelColorsFactory.GetLevelColors(levels);
             appenders.Add(AppenderFactory.GetManagedColoredConsoleAppender(layout, colors));
 
             HierarchyFactory.SetHierarchy(Level.Debug, appenders);

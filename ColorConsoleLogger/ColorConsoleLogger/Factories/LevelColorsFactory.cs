@@ -40,7 +40,7 @@ namespace ColorConsoleLogger.Factories
             };
         }
 
-        public static IEnumerable<LevelColors> GetLevelColors(string[] pLevels)
+        public static ICollection<LevelColors> GetLevelColors(string[] pLevels)
         {
             ICollection<LevelColors> colors = [];
             foreach (string level in pLevels)
