@@ -1,6 +1,7 @@
 ﻿using LogWrapper;
 using SqliteDbWrapper.Cache;
 using SqliteDbWrapper.Wrappers;
+using SqliteDbWrapper.Wrappers.LoggedWrapper;
 using SqliteDbWrapper.Wrappers.SimpleWrapper;
 
 namespace SqliteDbWrapper
@@ -20,7 +21,7 @@ namespace SqliteDbWrapper
 
 			if (pConfigs.IsUseExtensiveLogging)
 			{
-				return CreateSimpleWrapper<TBaseDbModel>(pDbFilePath, pIsNew, pCacheFactory, pConfigs.LoggerConfigs);
+				return CreateLoggedWrapper<TBaseDbModel>(pDbFilePath, pIsNew, pCacheFactory, pConfigs.LoggerConfigs);
 			}
 
 			return CreateDefaultWrapper<TBaseDbModel>(pDbFilePath, pIsNew, pCacheFactory, pConfigs.LoggerConfigs);
@@ -42,6 +43,21 @@ namespace SqliteDbWrapper
 			else
 			{
 				return new SimpleSqliteDbWrapper<TBaseDbModel>(pDbFilePath, pIsNew, pCacheFactory, logger);
+			}
+		}
+
+		private static LoggedSqliteDbWrapper<TBaseDbModel> CreateLoggedWrapper<TBaseDbModel>(string pDbFilePath, bool pIsNew, ISqliteDbCacheFactory? pCacheFactory = null, LoggerConfigs? pLogConfigs = null)
+		{
+			ILogger logger = LoggerFactory.CreateNewLogger(typeof(SimpleSqliteDbWrapper<TBaseDbModel>), pLogConfigs);
+			SimpleSqliteDbWrapper<TBaseDbModel> wrapper = CreateSimpleWrapper<TBaseDbModel>(pDbFilePath, pIsNew, pCacheFactory, pLogConfigs);
+
+			if (pCacheFactory == null)
+			{
+				return new LoggedSqliteDbWrapper<TBaseDbModel>(wrapper, logger);
+			}
+			else
+			{
+				return new LoggedSqliteDbWrapper<TBaseDbModel>(wrapper, logger);
 			}
 		}
 	}
