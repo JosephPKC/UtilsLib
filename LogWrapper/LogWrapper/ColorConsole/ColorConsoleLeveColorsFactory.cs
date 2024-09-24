@@ -1,11 +1,11 @@
-﻿using log4net.Core;
-using static log4net.Appender.ManagedColoredConsoleAppender;
+﻿using log4net.Appender;
+using log4net.Core;
 
-namespace ColorConsoleLogger.Factories
+namespace LogWrapper.ColorConsole
 {
-    internal static class LevelColorsFactory
+    internal static class ColorConsoleLeveColorsFactory
     {
-        public static LevelColors GetLevelColors(string pLevel)
+        public static ManagedColoredConsoleAppender.LevelColors GetLevelColors(string pLevel)
         {
             return pLevel.ToUpper() switch
             {
@@ -22,8 +22,9 @@ namespace ColorConsoleLogger.Factories
                 },
                 "FATAL" => new()
                 {
-                    ForeColor = ConsoleColor.Blue,
+                    ForeColor = ConsoleColor.DarkRed,
                     BackColor = ConsoleColor.White,
+                    
                     Level = Level.Fatal
                 },
                 "INFO" => new()
@@ -40,9 +41,9 @@ namespace ColorConsoleLogger.Factories
             };
         }
 
-        public static ICollection<LevelColors> GetLevelColors(string[] pLevels)
+        public static ICollection<ManagedColoredConsoleAppender.LevelColors> GetLevelColors(string[] pLevels)
         {
-            ICollection<LevelColors> colors = [];
+            ICollection<ManagedColoredConsoleAppender.LevelColors> colors = [];
             foreach (string level in pLevels)
             {
                 colors.Add(GetLevelColors(level));

@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y /d &quot;$(ProjectDir)\obj\Release\net8.0\JsonParser.dll&quot; &quot;..\..\bin\&quot;" />
+    <Exec Command="xcopy /y /d &quot;$(ProjectDir)\obj\Release\net8.0\$(ProjectName).dll&quot; &quot;..\..\bin\&quot;" />
   </Target>
 
 </Project>
