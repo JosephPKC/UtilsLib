@@ -2,13 +2,13 @@
 {
 	public static class StringUtils
 	{
-		public static string SetOrAppend(string pString, string? pNewString, bool pIsAppend)
+		public static string SetOrAppend(string pString, string? pNewString, string pDelim, bool pIsAppend)
 		{
 			if (string.IsNullOrWhiteSpace(pNewString))
 			{
 				return pIsAppend ? pString : "";
 			}
-			return pIsAppend ? pString + pNewString : pNewString;
+			return pIsAppend ? $"{pString}{pDelim}{pNewString}" : pNewString;
 		}
 	}
 }

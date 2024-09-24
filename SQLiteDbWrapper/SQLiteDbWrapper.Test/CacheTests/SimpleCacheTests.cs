@@ -7,16 +7,6 @@ namespace SQLiteDbWrapper.Test.CacheTests
 	/// </summary>
 	public class SimpleCacheTests
 	{
-		// Cache has these major behaviors:
-		//	- Update item
-		//		- Update item that matches key
-		//		- Update item that does not match key
-		//		- Update item with invalid or null key
-		//		- Update item with invalid or null values
-		//	- Delete All
-		//		- Delete empty cache
-		//		- Delete nonempty cache
-
 		/// <summary>
 		/// Creates a test version of the SimpleSqliteDbCache with generic type string that is empty.
 		/// </summary>

@@ -12,9 +12,9 @@ namespace SqliteDbWrapper.Queries.SimpleSelectQuery
 	{
 		private readonly SimpleSqliteDbSelectQueryState _state = new();
 
-		public SimpleSqliteDbSelectQuery Select(string pFields, bool pIsAppend = false)
+		public SimpleSqliteDbSelectQuery Select(string pFields)
 		{
-			_state.Fields = Utils.StringUtils.SetOrAppend(_state.Fields, pFields, pIsAppend);
+			_state.Fields = pFields;
 			return this;
 		}
 
@@ -30,25 +30,25 @@ namespace SqliteDbWrapper.Queries.SimpleSelectQuery
 			return this;
 		}
 
-		public SimpleSqliteDbSelectQuery Where(string pConditions, bool pIsAppend = false)
+		public SimpleSqliteDbSelectQuery Where(string pConditions)
 		{
-			_state.Where = Utils.StringUtils.SetOrAppend(_state.Where, pConditions, pIsAppend);
+			_state.Where = pConditions;
 			return this;
 		}
 
-		public SimpleSqliteDbSelectQuery GroupBy(string pGroups, bool pIsAppend = false)
+		public SimpleSqliteDbSelectQuery GroupBy(string pGroups)
 		{
-			_state.GroupBy = Utils.StringUtils.SetOrAppend(_state.GroupBy, pGroups, pIsAppend);
+			_state.GroupBy = pGroups;
 			return this;
 		}
 
-		public SimpleSqliteDbSelectQuery OrderBy(string pOrder, bool pIsAppend = false)
+		public SimpleSqliteDbSelectQuery OrderBy(string pOrder)
 		{
-			_state.OrderBy = Utils.StringUtils.SetOrAppend(_state.OrderBy, pOrder, pIsAppend);
+			_state.OrderBy = pOrder;
 			return this;
 		}
 
-		public SimpleSqliteDbSelectQuery Asc(bool pIsAsc)
+		public SimpleSqliteDbSelectQuery Asc(bool pIsAsc = true)
 		{
 			_state.IsAsc = pIsAsc;
 			return this;
@@ -94,7 +94,7 @@ namespace SqliteDbWrapper.Queries.SimpleSelectQuery
 				}
 			}
 
-			return queryBuilder.ToString();
+			return queryBuilder.ToString().Trim();
 		}
 		#endregion
 	}
