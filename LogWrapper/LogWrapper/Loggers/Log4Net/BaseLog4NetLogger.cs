@@ -4,15 +4,13 @@ using log4net.Core;
 using log4net.Layout;
 using log4net.Repository.Hierarchy;
 
-namespace LogWrapper
+namespace LogWrapper.Loggers.Log4Net
 {
-    internal abstract class BaseLogger
+    internal abstract class BaseLog4NetLogger : BaseLogger
     {
-        protected static readonly string[] _levels = ["DEBUG", "ERROR", "FATAL", "INFO", "WARN"];
-
         protected readonly ILog _log;
 
-        public BaseLogger(Type pDeclaringType)
+        public BaseLog4NetLogger(Type pDeclaringType) : base(pDeclaringType)
         {
             _log = LogManager.GetLogger(pDeclaringType);
             PatternLayout layout = GetPatternLayout();

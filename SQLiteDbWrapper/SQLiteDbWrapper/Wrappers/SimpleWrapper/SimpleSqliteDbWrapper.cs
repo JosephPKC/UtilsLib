@@ -1,13 +1,15 @@
 ﻿using System.Data;
 using System.Data.SQLite;
 
+using LogWrapper;
+using LogWrapper.Loggers;
 using Utils.Exceptions;
 
 using SqliteDbWrapper.Cache;
+using SqliteDbWrapper.Cache.SimpleCache;
+using SqliteDbWrapper.Queries;
 using SqliteDbWrapper.Readers;
 using SqliteDbWrapper.Values;
-using SqliteDbWrapper.Queries;
-using LogWrapper;
 
 namespace SqliteDbWrapper.Wrappers.SimpleWrapper
 {
@@ -22,25 +24,39 @@ namespace SqliteDbWrapper.Wrappers.SimpleWrapper
 		private readonly ISqliteDbCache<ICollection<TBaseDbModel>> _cache;
 		private readonly ILogger log;
 
-		public SimpleSqliteDbWrapper(string pDbFilePath, bool pIsNewDb, ILogger pLogger)
+		public SimpleSqliteDbWrapper(string pDbFilePath, bool pIsNewDb, ISqliteDbCacheFactory? pCacheFactory = null, ILoggerFactory? pLoggerFactory = null)
 		{
 			_sqlite = new SQLiteConnection($"Data Source={pDbFilePath};New={pIsNewDb}");
-			_cache = new SimpleSqliteDbCacheFactory().CreateNewCache<ICollection<TBaseDbModel>>();
-			log = pLogger;
 
+			if (pCacheFactory == null)
+			{
+				_cache = new SimpleSqliteDbCacheFactory().CreateNewCache<ICollection<TBaseDbModel>>();
+			}
+			else
+			{
+				_cache = pCacheFactory.CreateNewCache<ICollection<TBaseDbModel>>();
+			}
+			
+			if (pLoggerFactory == null)
+			{
+				log = LoggerFactory.CreateNullLogger(typeof(SimpleSqliteDbWrapper<TBaseDbModel>));
+			}
+			else
+			{
+				log = pLoggerFactory.CreateNewLogger(typeof(SimpleSqliteDbWrapper<TBaseDbModel>));
+			}
 		}
 
-		public SimpleSqliteDbWrapper(string pDbFilePath, bool pIsNewDb, ISqliteDbCacheFactory pCacheFactory, ILogger pLogger)
+		/// <summary>
+		/// Lets the tester inject dependencies.
+		/// </summary>
+		/// <param name="pDbConnection"></param>
+		/// <param name="pCache"></param>
+		/// <param name="pLogger"></param>
+		public SimpleSqliteDbWrapper(IDbConnection pDbConnection, ISqliteDbCache<ICollection<TBaseDbModel>> pCache, ILogger pLogger)
 		{
-			_sqlite = new SQLiteConnection($"Data Source={pDbFilePath};New={pIsNewDb}");
-			_cache = pCacheFactory.CreateNewCache<ICollection<TBaseDbModel>>();
-			log = pLogger;
-		}
-
-		public SimpleSqliteDbWrapper(IDbConnection pSqliteConnection, ISqliteDbCacheFactory pCacheFactory, ILogger pLogger)
-		{
-			_sqlite = pSqliteConnection;
-			_cache = pCacheFactory.CreateNewCache<ICollection<TBaseDbModel>>();
+			_sqlite = pDbConnection;
+			_cache = pCache;
 			log = pLogger;
 		}
 
@@ -49,7 +65,7 @@ namespace SqliteDbWrapper.Wrappers.SimpleWrapper
 		public void CreateTable(string pTableName, ICollection<string> pColumns)
 		{
 			ArgumentException.ThrowIfNullOrWhiteSpace(pTableName);
-			ArgumentNullException.ThrowIfNull(pColumns);
+			ArgumentExceptionExt.ThrowIfNullOrEmpty(pColumns);
 
 			string query = $"CREATE TABLE {pTableName}({string.Join(",", pColumns)});";
 			ExecuteNonQuery(query);
@@ -69,7 +85,7 @@ namespace SqliteDbWrapper.Wrappers.SimpleWrapper
 			ArgumentException.ThrowIfNullOrWhiteSpace(pTableName);
 			ArgumentNullException.ThrowIfNull(pValues);
 
-			string columns = pColumns == null ? string.Empty : pColumns.ToString();
+			string columns = pColumns == null ? string.Empty : $" ({pColumns})";
 
 			string query = $"INSERT INTO {pTableName}{columns} VALUES ({pValues});";
 			ExecuteNonQuery(query);
@@ -78,9 +94,9 @@ namespace SqliteDbWrapper.Wrappers.SimpleWrapper
 		public void InsertAll(string pTableName, ICollection<SqliteDbValueList> pValues, SqliteDbValueList? pColumns = null)
 		{
 			ArgumentException.ThrowIfNullOrWhiteSpace(pTableName);
-			ArgumentNullExceptionExt.ThrowIfNullOrEmpty(pValues);
+			ArgumentExceptionExt.ThrowIfNullOrEmpty(pValues);
 
-			string columns = pColumns == null ? string.Empty : pColumns.ToString();
+			string columns = pColumns == null ? string.Empty : $" ({pColumns})";
 
 			ICollection<string> valueRows = [];
 			foreach (SqliteDbValueList valueRow in pValues)
@@ -98,21 +114,16 @@ namespace SqliteDbWrapper.Wrappers.SimpleWrapper
 			ArgumentException.ThrowIfNullOrWhiteSpace(pTableName);
 			ArgumentNullException.ThrowIfNull(pValues);
 
-			string where = pWhere == null ? string.Empty : $"WHERE {pWhere}";
+			string where = pWhere == null ? string.Empty : $" WHERE {pWhere}";
 			
 			string query = $"UPDATE {pTableName} SET {pValues}{where};";
 			ExecuteNonQuery(query);
 		}
 
 		/* Selects */
-		public TBaseDbModel? SelectFirst(string pTableName, ISqliteDbQuery pSelectQuery, ISqliteDbReader pReader, bool pIsForce = false)
+		public ICollection<TBaseDbModel>? Select(string pTableName, ISqliteDbQuery pSelectQuery, ISqliteDbReader<TBaseDbModel> pReader, bool pIsForce = false)
 		{
-			ICollection<TBaseDbModel>? results = SelectAll(pTableName, pSelectQuery, pReader, pIsForce);
-			return results != null && results.Count > 0 ? results.First() : default;
-		}
-
-		public ICollection<TBaseDbModel>? SelectAll(string pTableName, ISqliteDbQuery pSelectQuery, ISqliteDbReader pReader, bool pIsForce = false)
-		{
+			ArgumentException.ThrowIfNullOrWhiteSpace(pTableName);
 			ArgumentNullException.ThrowIfNull(pSelectQuery);
 			ArgumentNullException.ThrowIfNull(pReader);
 
@@ -143,7 +154,7 @@ namespace SqliteDbWrapper.Wrappers.SimpleWrapper
 			}
 		}
 
-		private ICollection<TBaseDbModel> ExecuteQuery(string pQuery, ISqliteDbReader pReader, bool pIsForce = false)
+		private ICollection<TBaseDbModel> ExecuteQuery(string pQuery, ISqliteDbReader<TBaseDbModel> pReader, bool pIsForce = false)
 		{
 			ArgumentException.ThrowIfNullOrWhiteSpace(pQuery);
 			log.Info($"SQLITE QUERY: {pQuery}");
@@ -164,7 +175,7 @@ namespace SqliteDbWrapper.Wrappers.SimpleWrapper
 				command.CommandText = pQuery;
 				_sqlite.Open();
 				using IDataReader reader = command.ExecuteReader();
-				items = pReader.ReadAll<TBaseDbModel>(reader);
+				items = pReader.ReadAll(reader);
 				// Store will either create a new entry or update the existing entry.
 				_cache.Store(pQuery, items, 0);
 			}

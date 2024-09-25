@@ -10,7 +10,8 @@ namespace SqliteDbWrapper.Values
 	{
 		protected readonly IList<string> _values = [.. pValues];
 
-		public string this[int pIndex] {
+		public string this[int pIndex] 
+		{
 			get
 			{
 				ArgumentOutOfRangeExceptionExt.ThrowIfOutOfRange(_values, pIndex);
@@ -20,7 +21,7 @@ namespace SqliteDbWrapper.Values
 
 		public override string ToString()
 		{
-			return string.Join(",", _values);
+			return string.Join(", ", _values);
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using LogWrapper;
+﻿using LogWrapper.Loggers;
+using SqliteDbWrapper.Cache;
 
 namespace SqliteDbWrapper
 {
@@ -7,14 +8,12 @@ namespace SqliteDbWrapper
 	/// </summary>
 	public class SqliteDbWrapperConfigs
 	{
+		public ISqliteDbCacheFactory? CustomCache { get; set; } = null;
+		public ILoggerFactory? CustomLogger {  get; set; } = null;
+
 		/// <summary>
 		/// Adds additional logs for SQLite transactions and commands, including operation time elapsed.
 		/// </summary>
 		public bool IsUseExtensiveLogging { get; set; } = false;
-
-		/// <summary>
-		/// Logger configs from the LogWrapper library to customimze logging settings.
-		/// </summary>
-		public LoggerConfigs? LoggerConfigs { get; set; } = null;
 	}
 }

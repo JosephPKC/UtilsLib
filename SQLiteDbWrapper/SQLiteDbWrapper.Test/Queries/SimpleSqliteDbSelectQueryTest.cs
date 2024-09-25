@@ -1,21 +1,21 @@
 ﻿using SqliteDbWrapper.Queries;
 using SqliteDbWrapper.Queries.SimpleSelectQuery;
 
-namespace SQLiteDbWrapper.Test.QueryTests
+namespace SqliteDbWrapper.Test.Queries
 {
-	/// <summary>
-	/// Tests the SimpleSqliteDbSelectQuery implementation.
-	/// </summary>
-	public class SimpleSelectQueryTests
+    /// <summary>
+    /// Tests the SimpleSqliteDbSelectQuery implementation.
+    /// </summary>
+    public class SimpleSqliteDbSelectQueryTest
 	{
-		private ISqliteDbQuery CreateEmptySimpleSelectQuery()
+		private static SimpleSqliteDbSelectQuery CreateEmptySimpleSelectQuery()
 		{
 			SimpleSqliteDbSelectQuery query = new();
 
 			return query;
 		}
 
-		private ISqliteDbQuery CreateLoadedSimpleSelectQuery(string? pFields = null, int? pTop = null, bool? pIsDistinct = null, string ? pWhere = null, string? pGroupBy = null, string? pOrderBy = null, bool? pIsAsc = null)
+		private static SimpleSqliteDbSelectQuery CreateLoadedSimpleSelectQuery(string? pFields = null, int? pTop = null, bool? pIsDistinct = null, string? pWhere = null, string? pGroupBy = null, string? pOrderBy = null, bool? pIsAsc = null)
 		{
 			SimpleSqliteDbSelectQuery query = new();
 
@@ -24,10 +24,10 @@ namespace SQLiteDbWrapper.Test.QueryTests
 				query.Select(pFields);
 			}
 
-            if (pTop != null)
-            {
+			if (pTop != null)
+			{
 				query.Top(pTop.Value);
-            }
+			}
 
 			if (pIsDistinct != null)
 			{
@@ -54,7 +54,7 @@ namespace SQLiteDbWrapper.Test.QueryTests
 				query.Asc(pIsAsc.Value);
 			}
 
-            return query;
+			return query;
 		}
 
 		#region "BuildQuery"
@@ -62,12 +62,12 @@ namespace SQLiteDbWrapper.Test.QueryTests
 		public void Test_BuildQuery_EmptyQuery_ReturnSelectAllQuery()
 		{
 			// Arrange
-			ISqliteDbQuery query = CreateEmptySimpleSelectQuery();
+			SimpleSqliteDbSelectQuery query = CreateEmptySimpleSelectQuery();
 			string table = "table";
 
 			// Act
 			string actual = query.BuildQuery(table);
-			string expected = $"SELECT * FROM {table}";
+			string expected = $"SELECT * FROM {table};";
 
 			// Assert
 			Assert.Equal(expected, actual);
@@ -81,12 +81,12 @@ namespace SQLiteDbWrapper.Test.QueryTests
 		{
 			// Arrange
 			string fields = pFields;
-			ISqliteDbQuery query = CreateLoadedSimpleSelectQuery(pFields: fields);
+			SimpleSqliteDbSelectQuery query = CreateLoadedSimpleSelectQuery(pFields: fields);
 			string table = "table";
 
 			// Act
 			string actual = query.BuildQuery(table);
-			string expected = $"SELECT {pExpectedFieldsStr} FROM {table}";
+			string expected = $"SELECT {pExpectedFieldsStr} FROM {table};";
 
 			// Assert
 			Assert.Equal(expected, actual);
@@ -101,12 +101,12 @@ namespace SQLiteDbWrapper.Test.QueryTests
 			// Arrange
 			string fields = "fields";
 			bool? isDistinct = pIsDistinct;
-			ISqliteDbQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pIsDistinct: isDistinct);
+			SimpleSqliteDbSelectQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pIsDistinct: isDistinct);
 			string table = "table";
 
 			// Act
 			string actual = query.BuildQuery(table);
-			string expected = $"SELECT {pExpectedDistinctStr}{fields} FROM {table}";
+			string expected = $"SELECT {pExpectedDistinctStr}{fields} FROM {table};";
 
 			// Assert
 			Assert.Equal(expected, actual);
@@ -121,12 +121,12 @@ namespace SQLiteDbWrapper.Test.QueryTests
 			// Arrange
 			string fields = "fields";
 			int top = pTop;
-			ISqliteDbQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pTop: top);
+			SimpleSqliteDbSelectQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pTop: top);
 			string table = "table";
 
 			// Act
 			string actual = query.BuildQuery(table);
-			string expected = $"SELECT {pExpectedTopStr}{fields} FROM {table}";
+			string expected = $"SELECT {pExpectedTopStr}{fields} FROM {table};";
 
 			// Assert
 			Assert.Equal(expected, actual);
@@ -139,12 +139,12 @@ namespace SQLiteDbWrapper.Test.QueryTests
 			string fields = "fields";
 			bool isDistinct = true;
 			int top = 1;
-			ISqliteDbQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pIsDistinct: isDistinct, pTop: top);
+			SimpleSqliteDbSelectQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pIsDistinct: isDistinct, pTop: top);
 			string table = "table";
 
 			// Act
 			string actual = query.BuildQuery(table);
-			string expected = $"SELECT DISTINCT TOP 1 {fields} FROM {table}";
+			string expected = $"SELECT DISTINCT TOP 1 {fields} FROM {table};";
 
 			// Assert
 			Assert.Equal(expected, actual);
@@ -159,12 +159,12 @@ namespace SQLiteDbWrapper.Test.QueryTests
 			// Arrange
 			string fields = "fields";
 			string? where = pWhere;
-			ISqliteDbQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pWhere: where);
+			SimpleSqliteDbSelectQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pWhere: where);
 			string table = "table";
 
 			// Act
 			string actual = query.BuildQuery(table);
-			string expected = $"SELECT {fields} FROM {table}{pExpectedWhereStr}";
+			string expected = $"SELECT {fields} FROM {table}{pExpectedWhereStr};";
 
 			// Assert
 			Assert.Equal(expected, actual);
@@ -179,12 +179,12 @@ namespace SQLiteDbWrapper.Test.QueryTests
 			// Arrange
 			string fields = "fields";
 			string? groupBy = pGroupBy;
-			ISqliteDbQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pGroupBy: groupBy);
+			SimpleSqliteDbSelectQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pGroupBy: groupBy);
 			string table = "table";
 
 			// Act
 			string actual = query.BuildQuery(table);
-			string expected = $"SELECT {fields} FROM {table}{pExpectedGroupByStr}";
+			string expected = $"SELECT {fields} FROM {table}{pExpectedGroupByStr};";
 
 			// Assert
 			Assert.Equal(expected, actual);
@@ -206,12 +206,12 @@ namespace SQLiteDbWrapper.Test.QueryTests
 			string fields = "fields";
 			string? orderBy = pOrderBy;
 			bool? isAsc = pIsAsc;
-			ISqliteDbQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pOrderBy: orderBy, pIsAsc: isAsc);
+			SimpleSqliteDbSelectQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pOrderBy: orderBy, pIsAsc: isAsc);
 			string table = "table";
 
 			// Act
 			string actual = query.BuildQuery(table);
-			string expected = $"SELECT {fields} FROM {table}{pExpectedOrderByStr}";
+			string expected = $"SELECT {fields} FROM {table}{pExpectedOrderByStr};";
 
 			// Assert
 			Assert.Equal(expected, actual);
@@ -226,12 +226,12 @@ namespace SQLiteDbWrapper.Test.QueryTests
 			string groupBy = "group";
 			string orderBy = "order";
 			bool isAsc = true;
-			ISqliteDbQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pWhere: where, pGroupBy: groupBy, pOrderBy: orderBy, pIsAsc: isAsc);
+			SimpleSqliteDbSelectQuery query = CreateLoadedSimpleSelectQuery(pFields: fields, pWhere: where, pGroupBy: groupBy, pOrderBy: orderBy, pIsAsc: isAsc);
 			string table = "table";
 
 			// Act
 			string actual = query.BuildQuery(table);
-			string expected = $"SELECT {fields} FROM {table} WHERE {where} GROUP BY {groupBy} ORDER BY {orderBy} {(isAsc ? "ASC" : "DESC")}";
+			string expected = $"SELECT {fields} FROM {table} WHERE {where} GROUP BY {groupBy} ORDER BY {orderBy} {(isAsc ? "ASC" : "DESC")};";
 
 			// Assert
 			Assert.Equal(expected, actual);
@@ -248,12 +248,12 @@ namespace SQLiteDbWrapper.Test.QueryTests
 			string groupBy = "group";
 			string orderBy = "order";
 			bool isAsc = true;
-			ISqliteDbQuery query = CreateLoadedSimpleSelectQuery(fields, top, isDistinct, where, groupBy, orderBy, isAsc);
+			SimpleSqliteDbSelectQuery query = CreateLoadedSimpleSelectQuery(fields, top, isDistinct, where, groupBy, orderBy, isAsc);
 			string table = "table";
 
 			// Act
 			string actual = query.BuildQuery(table);
-			string expected = $"SELECT DISTINCT TOP {top} {fields} FROM {table} WHERE {where} GROUP BY {groupBy} ORDER BY {orderBy} ASC";
+			string expected = $"SELECT DISTINCT TOP {top} {fields} FROM {table} WHERE {where} GROUP BY {groupBy} ORDER BY {orderBy} ASC;";
 
 			// Assert
 			Assert.Equal(expected, actual);

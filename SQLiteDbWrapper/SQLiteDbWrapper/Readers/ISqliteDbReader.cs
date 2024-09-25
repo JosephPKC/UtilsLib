@@ -6,9 +6,9 @@ namespace SqliteDbWrapper.Readers
 	/// The SqliteDbReader lets the client define how to translate data from SELECT queries to their own data object models.
 	/// The client is REQUIRED to provide this when doing SELECT queries.
 	/// </summary>
-	public interface ISqliteDbReader
+	public interface ISqliteDbReader<TBaseDbModel>
 	{
-		TBaseDbModel? ReaderFirst<TBaseDbModel>(IDataReader pReader);
-		ICollection<TBaseDbModel> ReadAll<TBaseDbModel>(IDataReader pReader);
+		TBaseDbModel? ReaderFirst(IDataReader pReader);
+		ICollection<TBaseDbModel> ReadAll(IDataReader pReader);
 	}
 }

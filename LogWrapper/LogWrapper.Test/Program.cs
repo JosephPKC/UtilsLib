@@ -1,11 +1,15 @@
-﻿namespace LogWrapper.Test
+﻿using LogWrapper.Loggers;
+
+namespace LogWrapper.Test
 {
-	public class Program
+    public class Program
 	{
 		/* Console Tests */
 		public static void Main(string[] args)
 		{
 			Test("ColorConsoleLogger", TestColorConsole);
+			Test("NullLogger", TestNull);
+			Test("SimpleConsoleLogger", TestSimpleConsole);
 		}
 
 		private static void Test(string pTestName, Action pTest)
@@ -17,8 +21,29 @@
 
 		private static void TestColorConsole()
 		{
-			// At the moment, only Color Console is supported.
-			ILogger log = LoggerFactory.CreateNewLogger(typeof(Program));
+			ILogger log = LoggerFactory.CreateColorConsoleLogger(typeof(Program));
+
+			log.Debug("THIS IS A DEBUG MESSAGE.");
+			log.Error("THIS IS AN ERROR MESSAGE.");
+			log.Fatal("THIS IS A FATAL MESSAGE.");
+			log.Info("THIS IS AN INFO MESSAGE.");
+			log.Warn("THIS IS A WARN MESSAGE.");
+		}
+
+		private static void TestNull()
+		{
+			ILogger log = LoggerFactory.CreateNullLogger(typeof(Program));
+
+			log.Debug("THIS IS A DEBUG MESSAGE.");
+			log.Error("THIS IS AN ERROR MESSAGE.");
+			log.Fatal("THIS IS A FATAL MESSAGE.");
+			log.Info("THIS IS AN INFO MESSAGE.");
+			log.Warn("THIS IS A WARN MESSAGE.");
+		}
+
+		private static void TestSimpleConsole()
+		{
+			ILogger log = LoggerFactory.CreateSimpleConsoleLogger(typeof(Program));
 
 			log.Debug("THIS IS A DEBUG MESSAGE.");
 			log.Error("THIS IS AN ERROR MESSAGE.");

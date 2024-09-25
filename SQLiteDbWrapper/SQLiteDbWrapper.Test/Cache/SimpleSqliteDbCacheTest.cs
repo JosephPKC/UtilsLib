@@ -1,11 +1,12 @@
 ﻿using SqliteDbWrapper.Cache;
+using SqliteDbWrapper.Cache.SimpleCache;
 
-namespace SQLiteDbWrapper.Test.CacheTests
+namespace SqliteDbWrapper.Test.Cache
 {
 	/// <summary>
 	/// Tests the SimpleSqliteDbCache implementation.
 	/// </summary>
-	public class SimpleCacheTests
+	public class SimpleSqliteDbCacheTest
 	{
 		/// <summary>
 		/// Creates a test version of the SimpleSqliteDbCache with generic type string that is empty.
@@ -13,7 +14,7 @@ namespace SQLiteDbWrapper.Test.CacheTests
 		/// <param name="pKey"></param>
 		/// <param name="pValue"></param>
 		/// <returns></returns>
-		private ISqliteDbCache<string> CreateEmptyTestSimpleStringCache()
+		private static ISqliteDbCache<string> CreateEmptyTestSimpleStringCache()
 		{
 			ISqliteDbCache<string> cache = new SimpleSqliteDbCacheFactory().CreateNewCache<string>();
 
@@ -26,7 +27,7 @@ namespace SQLiteDbWrapper.Test.CacheTests
 		/// <param name="pKey"></param>
 		/// <param name="pValue"></param>
 		/// <returns></returns>
-		private ISqliteDbCache<string> CreateLoadedTestSimpleStringCache(string pKey, string pValue)
+		private static ISqliteDbCache<string> CreateLoadedTestSimpleStringCache(string pKey, string pValue)
 		{
 			ISqliteDbCache<string> cache = new SimpleSqliteDbCacheFactory().CreateNewCache<string>();
 			int lifeInS = 300;

@@ -1,4 +1,4 @@
-﻿namespace LogWrapper
+﻿namespace LogWrapper.Loggers
 {
     /// <summary>
     /// Logger exposes core functionality to clients.

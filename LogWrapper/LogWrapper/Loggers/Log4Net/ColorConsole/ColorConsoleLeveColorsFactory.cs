@@ -1,7 +1,7 @@
 ﻿using log4net.Appender;
 using log4net.Core;
 
-namespace LogWrapper.ColorConsole
+namespace LogWrapper.Loggers.Log4Net.ColorConsole
 {
     internal static class ColorConsoleLeveColorsFactory
     {
@@ -24,7 +24,7 @@ namespace LogWrapper.ColorConsole
                 {
                     ForeColor = ConsoleColor.DarkRed,
                     BackColor = ConsoleColor.White,
-                    
+
                     Level = Level.Fatal
                 },
                 "INFO" => new()

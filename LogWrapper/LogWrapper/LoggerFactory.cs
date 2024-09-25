@@ -1,30 +1,29 @@
-﻿using LogWrapper.ColorConsole;
+﻿using LogWrapper.Loggers;
+using LogWrapper.Loggers.Log4Net.ColorConsole;
+using LogWrapper.Loggers.Null;
+using LogWrapper.Loggers.SimpleConsole;
 
 namespace LogWrapper
 {
     /// <summary>
-    /// Constructs the Logger for the client.
+    /// Easy way for the client to construct a logger.
+	/// Client can also use individual logger factories instead.
     /// </summary>
-    public static class LoggerFactory
+    public static class LoggerFactory 
 	{
-		public static ILogger CreateNewLogger(Type pDeclaringType, LoggerConfigs? pConfigs = null)
+		public static ILogger CreateColorConsoleLogger(Type pDeclaringType)
 		{
-			if (pConfigs == null)
-			{
-				return CreateDefaultLogger(pDeclaringType);
-			}
-
-			if (pConfigs.UseColorCoding)
-			{
-				return new ColorConsoleLogger(pDeclaringType);
-			}
-
-			return CreateDefaultLogger(pDeclaringType);
+			return new ColorConsoleLoggerFactory().CreateNewLogger(pDeclaringType);
 		}
 
-		private static ColorConsoleLogger CreateDefaultLogger(Type pDeclaringType)
+		public static ILogger CreateNullLogger(Type pDeclaringType)
 		{
-			return new ColorConsoleLogger(pDeclaringType);
+			return new NullLoggerFactory().CreateNewLogger(pDeclaringType);
+		}
+
+		public static ILogger CreateSimpleConsoleLogger(Type pDeclaringType)
+		{
+			return new SimpleConsoleLoggerFactory().CreateNewLogger(pDeclaringType);
 		}
 	}
 }
