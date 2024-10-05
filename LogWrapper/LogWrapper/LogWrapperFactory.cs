@@ -6,10 +6,9 @@ using LogWrapper.Loggers.SimpleConsole;
 namespace LogWrapper
 {
     /// <summary>
-    /// Easy way for the client to construct a logger.
-	/// Client can also use individual logger factories instead.
+    /// Allows clients to construct loggers.
     /// </summary>
-    public static class LoggerFactory 
+    public static class LogWrapperFactory 
 	{
 		public static ILogger CreateColorConsoleLogger(Type pDeclaringType)
 		{

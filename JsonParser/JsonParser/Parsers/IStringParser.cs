@@ -2,8 +2,8 @@
 {
 	public interface IStringParser
 	{
-		string Serialize<TData>(TData pObj);
-		TData? Deserialize<TData>(string pJson);
-		ICollection<TData> DeserializeArray<TData>(string pJson);
+		string Serialize<TValue>(TValue pValue);
+		TValue? Deserialize<TValue>(string pJson);
+		ICollection<TValue> DeserializeArray<TValue>(string pJson);
 	}
 }

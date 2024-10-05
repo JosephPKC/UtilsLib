@@ -2,8 +2,10 @@
 {
 	public interface IFileParser
 	{
-		void SerializeToFile<TData>(TData pObj, string pFilePath);
-		TData? DeserializeFromFile<TData>(string pFilePath);
-		ICollection<TData> DeserializeArrayFromFile<TData>(string pFilePath);
+		void SerializeToFile<TValue>(TValue pValue, string pFilePath);
+
+		TValue? DeserializeFromFile<TValue>(string pFilePath);
+
+		ICollection<TValue> DeserializeArrayFromFile<TValue>(string pFilePath);
 	}
 }

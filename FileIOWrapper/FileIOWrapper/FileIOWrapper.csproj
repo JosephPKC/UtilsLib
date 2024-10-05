@@ -6,16 +6,6 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="8.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="FileIOWrapper">
-      <HintPath>..\..\bin\FileIOWrapper.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="xcopy /y /d &quot;$(ProjectDir)\obj\Release\net8.0\$(ProjectName).dll&quot; &quot;..\..\bin\&quot;" />
   </Target>
