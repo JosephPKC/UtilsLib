@@ -8,7 +8,7 @@ namespace SqliteDbWrapper.Readers
 	/// </summary>
 	public interface ISqliteDbReader<TBaseDbModel>
 	{
-		TBaseDbModel? ReaderFirst(IDataReader pReader);
+		TBaseDbModel? ReadFirst(IDataReader pReader);
 		ICollection<TBaseDbModel> ReadAll(IDataReader pReader);
 	}
 }

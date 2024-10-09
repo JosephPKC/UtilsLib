@@ -11,7 +11,7 @@ namespace SqliteDbWrapper.Test.Fakes
 			return ["value1", "value2"];
 		}
 
-		public string? ReaderFirst(IDataReader pReader)
+		public string? ReadFirst(IDataReader pReader)
 		{
 			return "value1";
 		}
