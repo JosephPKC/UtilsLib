@@ -16,5 +16,6 @@ namespace SqliteDbWrapper.Wrappers
         void InsertAll(string pTableName, ICollection<SqliteDbValueList> pValues, SqliteDbValueList? pColumns = null);
         void Update(string pTableName, SqliteDbUpdateValues pValues, string? pWhere = null);
         ICollection<TBaseDbModel>? Select(string pTableName, ISqliteDbQuery pSelectQuery, ISqliteDbReader<TBaseDbModel> pReader, bool pIsForce = false);
+        void Flush();
     }
 }

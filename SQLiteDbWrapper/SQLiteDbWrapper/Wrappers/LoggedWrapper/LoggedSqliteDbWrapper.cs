@@ -99,6 +99,15 @@ namespace SqliteDbWrapper.Wrappers.LoggedWrapper
 			log.Info($"END: CREATE TABLE {pTableName}. Elapsed: {stopwatch.ElapsedMilliseconds} ms.");
 			return result;
 		}
+
+		public void Flush()
+		{
+			log.Info($"BEGIN: FLUSHING CACHE.");
+			Stopwatch stopwatch = Stopwatch.StartNew();
+			_wrapper.Flush();
+			stopwatch.Stop();
+			log.Info($"END: FLUSHING CACHE. Elapsed: {stopwatch.ElapsedMilliseconds} ms.");
+		}
 		#endregion
 	}
 }

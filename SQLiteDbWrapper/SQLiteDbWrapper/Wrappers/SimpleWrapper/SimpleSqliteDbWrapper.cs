@@ -130,6 +130,12 @@ namespace SqliteDbWrapper.Wrappers.SimpleWrapper
 			string query = pSelectQuery.BuildQuery(pTableName);
 			return ExecuteQuery(query, pReader, pIsForce);
 		}
+
+		/* Flush */
+		public void Flush()
+		{
+			_cache.Flush();
+		}
 		#endregion
 
 		private void ExecuteNonQuery(string pQuery)
