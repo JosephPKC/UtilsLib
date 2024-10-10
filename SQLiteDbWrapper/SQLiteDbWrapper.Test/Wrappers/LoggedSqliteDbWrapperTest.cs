@@ -299,7 +299,7 @@ namespace SqliteDbWrapper.Test.Wrappers
 			TestDbConnection conn = new();
 			ISqliteDbWrapper<string> wrapper = CreateWrapper<string>(conn);
 			string table = "";
-			ISqliteDbReader<string> reader = new TestDbMapper();
+            Readers.ISqliteDbDataReader<string> reader = new TestDbMapper();
 			bool isForce = false;
 
 			SimpleSqliteDbSelectQuery selectQuery = new();
@@ -319,7 +319,7 @@ namespace SqliteDbWrapper.Test.Wrappers
 			TestDbConnection conn = new();
 			ISqliteDbWrapper<string> wrapper = CreateWrapper<string>(conn);
 			string table = "table";
-			ISqliteDbReader<string> reader = new TestDbMapper();
+            Readers.ISqliteDbDataReader<string> reader = new TestDbMapper();
 			bool isForce = false;
 
 			SimpleSqliteDbSelectQuery? selectQuery = null;
@@ -340,7 +340,7 @@ namespace SqliteDbWrapper.Test.Wrappers
 			TestDbConnection conn = new();
 			ISqliteDbWrapper<string> wrapper = CreateWrapper<string>(conn);
 			string table = "table";
-			ISqliteDbReader<string>? reader = null;
+            ISqliteDbDataReader<string>? reader = null;
 			bool isForce = false;
 
 			SimpleSqliteDbSelectQuery selectQuery = new();
@@ -362,7 +362,7 @@ namespace SqliteDbWrapper.Test.Wrappers
 			TestDbConnection conn = new();
 			ISqliteDbWrapper<string> wrapper = CreateWrapper<string>(conn);
 			string table = "table";
-			ISqliteDbReader<string> reader = new TestDbMapper();
+            Readers.ISqliteDbDataReader<string> reader = new TestDbMapper();
 			bool isForce = false;
 
 			SimpleSqliteDbSelectQuery selectQuery = new();
