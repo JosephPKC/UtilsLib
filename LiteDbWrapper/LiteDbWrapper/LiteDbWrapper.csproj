@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-	<Reference Include="ColorConsoleLogger">
-	  <HintPath>..\..\ColorConsoleLogger\ColorConsoleLogger\obj\Release\net8.0\ColorConsoleLogger.dll</HintPath>
+	<Reference Include="LogWrapper">
+	  <HintPath>..\..\bin\LogWrapper.dll</HintPath>
 	</Reference>
   </ItemGroup>
 	
