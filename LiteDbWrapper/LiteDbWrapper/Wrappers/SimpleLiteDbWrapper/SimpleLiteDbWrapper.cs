@@ -23,12 +23,12 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 		/// <returns></returns>
 		public ICollection<TModel> GetAll<TModel>(string pColName) where TModel : LiteDbModel
 		{
-			log.Info($"BEGIN: GET ALL {pColName}.");
+			log.Debug($"BEGIN: GET ALL {pColName}.");
 
 			ILiteCollection<TModel> col = GetCol<TModel>(pColName);
 			IEnumerable<TModel> result = col.FindAll();
 
-			log.Info($"END: GET ALL {pColName}.");
+			log.Debug($"END: GET ALL {pColName}.");
 			return (ICollection<TModel>)result;
 		}
 
@@ -41,12 +41,12 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 		/// <returns></returns>
 		public TModel? GetById<TModel>(string pColName, int pId) where TModel : LiteDbModel
 		{
-			log.Info($"BEGIN: GET {pId}.");
+			log.Debug($"BEGIN: GET {pId}.");
 
 			ILiteCollection<TModel> col = GetCol<TModel>(pColName);
 			TModel? result = col.FindById(new BsonValue(pId));
 
-			log.Info($"END: GET {pId}.");
+			log.Debug($"END: GET {pId}.");
 			return result;
 		}
 
@@ -59,12 +59,12 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 		/// <returns></returns>
 		public void Add<TModel>(string pColName, TModel pModel) where TModel : LiteDbModel
 		{
-			log.Info($"BEGIN: ADD {pModel.Id} TO {pColName}.");
+			log.Debug($"BEGIN: ADD {pModel.Id} TO {pColName}.");
 
 			ILiteCollection<TModel> col = GetCol<TModel>(pColName);
 			col.Insert(pModel.Id, pModel);
 
-			log.Info($"END: ADD {pModel.Id} TO {pColName}.");
+			log.Debug($"END: ADD {pModel.Id} TO {pColName}.");
 		}
 
 		/// <summary>
@@ -75,14 +75,14 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 		/// <param name="pModels"></param>
 		public void AddAll<TModel>(string pColName, ICollection<TModel> pModels) where TModel : LiteDbModel
 		{
-			log.Info($"BEGIN: ADD ALL {pColName}.");
+			log.Debug($"BEGIN: ADD ALL {pColName}.");
 			ILiteCollection<TModel> col = GetCol<TModel>(pColName);
 			foreach (TModel model in pModels)
 			{
-				log.Info($"ADDING {model.Id} TO {pColName}.");
+				log.Debug($"ADDING {model.Id} TO {pColName}.");
 				col.Insert(model.Id, model);
 			}
-			log.Info($"END: ADD ALL {pColName}.");
+			log.Debug($"END: ADD ALL {pColName}.");
 		}
 
 		/// <summary>
@@ -94,12 +94,12 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 		/// <param name="pModel"></param>
 		public void UpdateById<TModel>(string pColName, int pId, TModel pModel) where TModel : LiteDbModel
 		{
-			log.Info($"BEGIN: UPDATE {pId} IN {pColName}.");
+			log.Debug($"BEGIN: UPDATE {pId} IN {pColName}.");
 
 			ILiteCollection<TModel> col = GetCol<TModel>(pColName);
 			_ = col.Update(pId, pModel);
 
-			log.Info($"END: UPDATE {pId} IN {pColName}.");
+			log.Debug($"END: UPDATE {pId} IN {pColName}.");
 		}
 
 		/// <summary>
@@ -108,11 +108,11 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 		/// <param name="pColName"></param>
 		public void Drop(string pColName)
 		{
-			log.Info($"BEGIN: DROP {pColName}.");
+			log.Debug($"BEGIN: DROP {pColName}.");
 
 			_ = _db.DropCollection(pColName);
 
-			log.Info($"END: DROP {pColName}.");
+			log.Debug($"END: DROP {pColName}.");
 		}
 
 		/// <summary>
@@ -122,12 +122,12 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 		/// <param name="pId"></param>
 		public void DeleteById(string pColName, int pId)
 		{
-			log.Info($"BEGIN: DELETE {pId} IN {pColName}.");
+			log.Debug($"BEGIN: DELETE {pId} IN {pColName}.");
 
 			ILiteCollection<BsonDocument> col = GetCol(pColName);
 			_ = col.Delete(new BsonValue(pId));
 
-			log.Info($"END: DELETE {pId} IN {pColName}.");
+			log.Debug($"END: DELETE {pId} IN {pColName}.");
 		}
 
 		/// <summary>
@@ -136,12 +136,12 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 		/// <param name="pColName"></param>
 		public void DeleteAll(string pColName)
 		{
-			log.Info($"BEGIN: DELETE ALL {pColName}.");
+			log.Debug($"BEGIN: DELETE ALL {pColName}.");
 
 			ILiteCollection<BsonDocument> col = GetCol(pColName);
 			int result = col.DeleteAll();
 
-			log.Info($"END: DELETE ALL {pColName}: {result}.");
+			log.Debug($"END: DELETE ALL {pColName}: {result}.");
 		}
 		#endregion
 	}

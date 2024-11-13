@@ -32,10 +32,12 @@ namespace LogWrapper.Loggers.Log4Net
 
         protected virtual void SetHierarchy(Level pDefaultLevel, IAppender pAppender)
         {
-            Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
-            hierarchy.Root.Level = pDefaultLevel;
-            hierarchy.Root.AddAppender(pAppender);
-            hierarchy.Configured = true;
+			Hierarchy hierarchy = (Hierarchy)LogManager.GetRepository();
+			hierarchy.Root.Level = pDefaultLevel;
+			hierarchy.Root.RemoveAllAppenders();
+			hierarchy.Root.Additivity = false;
+			hierarchy.Root.AddAppender(pAppender);
+			hierarchy.Configured = true;
         }
     }
 }

@@ -130,7 +130,7 @@ namespace SqliteDbWrapper
 		{
 			if (pConfigs == null || pConfigs.CustomLogger == null)
 			{
-				return LoggerFactory.CreateNullLogger(pCallingType);
+				return LogWrapperFactory.CreateNullLogger(pCallingType);
 			}
 
 			return pConfigs.CustomLogger.CreateNewLogger(pCallingType);
