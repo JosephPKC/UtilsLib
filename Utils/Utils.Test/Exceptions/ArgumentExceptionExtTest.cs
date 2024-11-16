@@ -11,7 +11,7 @@ namespace Utils.Test.Exceptions
 			ICollection<string>? col = null;
 
 			// Act
-			void action() => ArgumentExceptionExt.ThrowIfNullOrEmpty(col);
+			void action() => ArgumentExceptionExt.ThrowIfNullOrEmpty(nameof(col), col);
 
 			// Assert
 			Assert.Throws<ArgumentException>(action);
@@ -24,7 +24,7 @@ namespace Utils.Test.Exceptions
 			ICollection<string>? col = [];
 
 			// Act
-			void action() => ArgumentExceptionExt.ThrowIfNullOrEmpty(col);
+			void action() => ArgumentExceptionExt.ThrowIfNullOrEmpty(nameof(col), col);
 
 			// Assert
 			Assert.Throws<ArgumentException>(action);
@@ -40,7 +40,7 @@ namespace Utils.Test.Exceptions
 			bool hasException = false;
 			try
 			{
-				ArgumentExceptionExt.ThrowIfNullOrEmpty(col);
+				ArgumentExceptionExt.ThrowIfNullOrEmpty(nameof(col), col);
 			}
 			catch (ArgumentException)
 			{

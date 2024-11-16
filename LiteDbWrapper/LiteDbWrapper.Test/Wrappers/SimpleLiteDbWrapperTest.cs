@@ -12,14 +12,11 @@ namespace LiteDbWrapper.Test.Wrappers
     public class SimpleLiteDbWrapperTest
 	{
 		#region "Test Values"
-		private int TestId1 { get; } = 0;
-		private string TestValue1 { get; } = "test";
-
-		private int TestId2 { get; } = 1;
-		private string TestValue2 { get; } = "test2";
+		private static int TestId1 { get; } = 0;
+		private static string TestValue1 { get; } = "test";
 
 		#endregion
-		private TestLiteDbModel CreateTestLiteDbModel()
+		private static TestLiteDbModel CreateTestLiteDbModel()
 		{
 			return new()
 			{
@@ -28,38 +25,33 @@ namespace LiteDbWrapper.Test.Wrappers
 			};
 		}
 
-		private IEnumerable<TestLiteDbModel> CreateTestLiteDbModels()
-		{
-			return [CreateTestLiteDbModel(), new() { Id = TestId2, TestValue = TestValue2 }];
-		}
-
-		private Mock<ILiteDatabase> CreateTestLiteDatabaseMock(ILiteCollection<TestLiteDbModel> pLiteCollection)
+		private static Mock<ILiteDatabase> CreateTestLiteDatabaseMock(ILiteCollection<TestLiteDbModel> pLiteCollection)
 		{
 			Mock<ILiteDatabase> mock = new();
 			_ = mock.Setup(x => x.GetCollection<TestLiteDbModel>(It.IsAny<string>(), It.IsAny<BsonAutoId>())).Returns(pLiteCollection);
 			return mock;
 		}
 
-		private Mock<ILiteDatabase> CreateTestLiteDatabaseNonGenericMock(ILiteCollection<BsonDocument> pLiteCollection)
+		private static Mock<ILiteDatabase> CreateTestLiteDatabaseNonGenericMock(ILiteCollection<BsonDocument> pLiteCollection)
 		{
 			Mock<ILiteDatabase> mock = new();
 			_ = mock.Setup(x => x.GetCollection(It.IsAny<string>(), It.IsAny<BsonAutoId>())).Returns(pLiteCollection);
 			return mock;
 		}
 
-		private ILiteDbWrapper CreateSimpleLiteDbWrapper(ILiteDatabase pDb)
+		private static ILiteDbWrapper CreateSimpleLiteDbWrapper(ILiteDatabase pDb)
 		{
 			ILogger logger = new NullLoggerFactory().CreateNewLogger(typeof(SimpleLiteDbWrapperTest));
-			return new LiteDbWrapperFactory().CreateNewWrapper(pDb, logger);
+			return LiteDbWrapperFactory.CreateNewWrapper(pDb, logger);
 		}
 
-		private ILiteDbWrapper CreateSimpleLiteDbWrapper(ILiteCollection<TestLiteDbModel> pLiteCollection)
+		private static ILiteDbWrapper CreateSimpleLiteDbWrapper(ILiteCollection<TestLiteDbModel> pLiteCollection)
 		{
 			Mock<ILiteDatabase> mock = CreateTestLiteDatabaseMock(pLiteCollection);
 			return CreateSimpleLiteDbWrapper(mock.Object);
 		}
 
-		private ILiteDbWrapper CreateSimpleLiteDbWrapper(ILiteCollection<BsonDocument> pLiteCollection)
+		private static ILiteDbWrapper CreateSimpleLiteDbWrapper(ILiteCollection<BsonDocument> pLiteCollection)
 		{
 			Mock<ILiteDatabase> mock = CreateTestLiteDatabaseNonGenericMock(pLiteCollection);
 			return CreateSimpleLiteDbWrapper(mock.Object);
@@ -171,50 +163,10 @@ namespace LiteDbWrapper.Test.Wrappers
 			string colName = "test";
 
 			// Act
-			wrapper.Add(colName, testModel);
+			wrapper.Add(colName, testModel.Id, testModel);
 
 			// Assert
 			mockCollection.Verify(x => x.Insert(testModel.Id, testModel), Times.Once);
-		}
-		#endregion
-
-		#region "AddAll"
-		[Fact]
-		public void Test_AddAll_AddModels()
-		{
-			// Arrange
-			IEnumerable<TestLiteDbModel> testModels = CreateTestLiteDbModels();
-
-			Mock<ILiteCollection<TestLiteDbModel>> mockCollection = new();
-			mockCollection.Setup(x => x.Insert(It.IsAny<BsonValue>(), It.IsAny<TestLiteDbModel>())).Verifiable();
-
-			ILiteDbWrapper wrapper = CreateSimpleLiteDbWrapper(mockCollection.Object);
-			string colName = "test";
-
-			// Act
-			wrapper.AddAll(colName, (ICollection<TestLiteDbModel>)testModels);
-
-			// Assert
-			mockCollection.Verify(x => x.Insert(It.IsAny<BsonValue>(), It.IsAny<TestLiteDbModel>()), Times.Exactly(2));
-		}
-
-		[Fact]
-		public void Test_AddAll_EmptyCollection_DontAddModels()
-		{
-			// Arrange
-			IEnumerable<TestLiteDbModel> testModels = [];
-
-			Mock<ILiteCollection<TestLiteDbModel>> mockCollection = new();
-			mockCollection.Setup(x => x.Insert(It.IsAny<BsonValue>(), It.IsAny<TestLiteDbModel>())).Verifiable();
-
-			ILiteDbWrapper wrapper = CreateSimpleLiteDbWrapper(mockCollection.Object);
-			string colName = "test";
-
-			// Act
-			wrapper.AddAll(colName, (ICollection<TestLiteDbModel>)testModels);
-
-			// Assert
-			mockCollection.Verify(x => x.Insert(It.IsAny<BsonValue>(), It.IsAny<TestLiteDbModel>()), Times.Never);
 		}
 		#endregion
 

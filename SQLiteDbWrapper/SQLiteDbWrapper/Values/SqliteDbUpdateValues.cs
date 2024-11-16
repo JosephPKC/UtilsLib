@@ -13,7 +13,7 @@ namespace SqliteDbWrapper.Values
 
 		public SqliteDbUpdateValues(ICollection<string> pColumns, ICollection<string> pValues)
 		{
-			ArgumentExceptionExt.ThrowIfNullOrEmpty(pValues);
+			ArgumentExceptionExt.ThrowIfNullOrEmpty(nameof(pValues), pValues);
 			if (pColumns != null && pColumns.Count != pValues.Count)
 			{
 				throw new ArgumentException($"Columns and Values must be equal length, if columns is specified.");

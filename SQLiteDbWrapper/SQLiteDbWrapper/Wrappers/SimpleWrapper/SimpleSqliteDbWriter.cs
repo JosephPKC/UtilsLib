@@ -17,7 +17,7 @@ namespace SqliteDbWrapper.Wrappers.SimpleWrapper
 		public void CreateTable(string pTableName, ICollection<string> pColumns)
 		{
 			ArgumentException.ThrowIfNullOrWhiteSpace(pTableName);
-			ArgumentExceptionExt.ThrowIfNullOrEmpty(pColumns);
+			ArgumentExceptionExt.ThrowIfNullOrEmpty(nameof(pColumns), pColumns);
 
 			string query = $"CREATE TABLE {pTableName}({string.Join(",", pColumns)});";
 			ExecuteNonQuery(query);
@@ -46,7 +46,7 @@ namespace SqliteDbWrapper.Wrappers.SimpleWrapper
 		public void InsertAll(string pTableName, ICollection<SqliteDbValueList> pValues, SqliteDbValueList? pColumns = null)
 		{
 			ArgumentException.ThrowIfNullOrWhiteSpace(pTableName);
-			ArgumentExceptionExt.ThrowIfNullOrEmpty(pValues);
+			ArgumentExceptionExt.ThrowIfNullOrEmpty(nameof(pValues), pValues);
 
 			string columns = pColumns == null ? string.Empty : $" ({pColumns})";
 

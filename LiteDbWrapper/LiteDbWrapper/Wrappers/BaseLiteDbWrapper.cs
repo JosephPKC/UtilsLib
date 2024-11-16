@@ -21,7 +21,7 @@ namespace LiteDbWrapper.Wrappers
 			log = pLogger;
 		}
 
-		protected virtual ILiteCollection<TModel> GetCol<TModel>(string pColName) where TModel : LiteDbModel
+		protected virtual ILiteCollection<TModel> GetCol<TModel>(string pColName)
 		{
 			try
 			{

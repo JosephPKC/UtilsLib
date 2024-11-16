@@ -7,10 +7,10 @@ using LiteDB;
 
 namespace LiteDbWrapper
 {
-	public class LiteDbWrapperFactory : ILiteDbWrapperFactory
+	public static class LiteDbWrapperFactory
 	{
 		#region "ILiteDbWrapperFactory"
-		public ILiteDbWrapper CreateNewWrapper(string pDbPath, ILoggerFactory? pCustomLogger)
+		public static ILiteDbWrapper CreateNewWrapper(string pDbPath, ILoggerFactory? pCustomLogger)
 		{
 			if (pCustomLogger != null)
 			{
@@ -22,7 +22,7 @@ namespace LiteDbWrapper
 		}
 		#endregion
 
-		public ILiteDbWrapper CreateNewWrapper(ILiteDatabase pDb, ILogger pLogger)
+		public static ILiteDbWrapper CreateNewWrapper(ILiteDatabase pDb, ILogger pLogger)
 		{
 			return new SimpleLiteDbWrapper(pDb, pLogger);
 		}

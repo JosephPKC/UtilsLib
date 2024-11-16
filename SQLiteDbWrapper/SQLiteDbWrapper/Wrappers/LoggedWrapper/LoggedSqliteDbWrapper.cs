@@ -14,7 +14,6 @@ namespace SqliteDbWrapper.Wrappers.LoggedWrapper
 	{
 		private readonly LoggedSqliteDbReader<TBaseDbModel> _reader = new(pWrapper.ToReader(), pLogger);
 		private readonly LoggedSqliteDbWriter _writer = new(pWrapper.ToWriter(), pLogger);
-		protected readonly ILogger log = pLogger;
 
 		#region "ISqliteDbWrapper"
 		public void CreateTable(string pTableName, ICollection<string> pColumns)
