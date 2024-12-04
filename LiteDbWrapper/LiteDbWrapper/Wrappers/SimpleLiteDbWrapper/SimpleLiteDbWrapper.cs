@@ -20,16 +20,24 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 		/// </summary>
 		/// <typeparam name="TModel"></typeparam>
 		/// <param name="pColName"></param>
+		/// <param name="pId"></param>
 		/// <param name="pModel"></param>
 		/// <returns></returns>
 		public void Add<TModel>(string pColName, int pId, TModel pModel)
 		{
-			log.Debug($"BEGIN: ADD {pId} TO {pColName}.");
+			Add(pColName, new BsonValue(pId), pModel);
+		}
 
-			ILiteCollection<TModel> col = GetCol<TModel>(pColName);
-			col.Insert(pId, pModel);
-
-			log.Debug($"END: ADD {pId} TO {pColName}.");
+		/// <summary>
+		/// Add a single item to the collection.
+		/// </summary>
+		/// <typeparam name="TModel"></typeparam>
+		/// <param name="pColName"></param>
+		/// <param name="pId"></param>
+		/// <param name="pModel"></param>
+		public void Add<TModel>(string pColName, Guid pId, TModel pModel)
+		{
+			Add(pColName, new BsonValue(pId), pModel);
 		}
 
 		/// <summary>
@@ -39,12 +47,17 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 		/// <param name="pId"></param>
 		public void DeleteById(string pColName, int pId)
 		{
-			log.Debug($"BEGIN: DELETE {pId} IN {pColName}.");
+			DeleteById(pColName, new BsonValue(pId));
+		}
 
-			ILiteCollection<BsonDocument> col = GetCol(pColName);
-			_ = col.Delete(new BsonValue(pId));
-
-			log.Debug($"END: DELETE {pId} IN {pColName}.");
+		/// <summary>
+		/// Deletes an item by id.
+		/// </summary>
+		/// <param name="pColName"></param>
+		/// <param name="pId"></param>
+		public void DeleteById(string pColName, Guid pId)
+		{
+			DeleteById(pColName, new BsonValue(pId));
 		}
 
 		/// <summary>
@@ -100,13 +113,19 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 		/// <returns></returns>
 		public TModel? GetById<TModel>(string pColName, int pId)
 		{
-			log.Debug($"BEGIN: GET {pId}.");
+			return GetById<TModel>(pColName, new BsonValue(pId));
+		}
 
-			ILiteCollection<TModel> col = GetCol<TModel>(pColName);
-			TModel? result = col.FindById(new BsonValue(pId));
-
-			log.Debug($"END: GET {pId}.");
-			return result;
+		/// <summary>
+		/// Gets one by matching the Id.
+		/// </summary>
+		/// <typeparam name="TModel"></typeparam>
+		/// <param name="pColName"></param>
+		/// <param name="pId"></param>
+		/// <returns></returns>
+		public TModel? GetById<TModel>(string pColName, Guid pId)
+		{
+			return GetById<TModel>(pColName, new BsonValue(pId));
 		}
 
 		/// <summary>
@@ -117,6 +136,56 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 		/// <param name="pId"></param>
 		/// <param name="pModel"></param>
 		public void UpdateById<TModel>(string pColName, int pId, TModel pModel)
+		{
+			UpdateById(pColName, new BsonValue(pId), pModel);
+		}
+
+		/// <summary>
+		/// Update an item by id.
+		/// </summary>
+		/// <typeparam name="TModel"></typeparam>
+		/// <param name="pColName"></param>
+		/// <param name="pId"></param>
+		/// <param name="pModel"></param>
+		public void UpdateById<TModel>(string pColName, Guid pId, TModel pModel)
+		{
+			UpdateById(pColName, new BsonValue(pId), pModel);
+		}
+		#endregion
+
+		#region "Op Helpers"
+		private void Add<TModel>(string pColName, BsonValue pId, TModel pModel)
+		{
+			log.Debug($"BEGIN: ADD {pId} TO {pColName}.");
+
+			ILiteCollection<TModel> col = GetCol<TModel>(pColName);
+			col.Insert(pId, pModel);
+
+			log.Debug($"END: ADD {pId} TO {pColName}.");
+		}
+
+		private void DeleteById(string pColName, BsonValue pId)
+		{
+			log.Debug($"BEGIN: DELETE {pId} IN {pColName}.");
+
+			ILiteCollection<BsonDocument> col = GetCol(pColName);
+			_ = col.Delete(pId);
+
+			log.Debug($"END: DELETE {pId} IN {pColName}.");
+		}
+
+		private TModel? GetById<TModel>(string pColName, BsonValue pId)
+		{
+			log.Debug($"BEGIN: GET {pId}.");
+
+			ILiteCollection<TModel> col = GetCol<TModel>(pColName);
+			TModel? result = col.FindById(pId);
+
+			log.Debug($"END: GET {pId}.");
+			return result;
+		}
+
+		private void UpdateById<TModel>(string pColName, BsonValue pId, TModel pModel)
 		{
 			log.Debug($"BEGIN: UPDATE {pId} IN {pColName}.");
 
