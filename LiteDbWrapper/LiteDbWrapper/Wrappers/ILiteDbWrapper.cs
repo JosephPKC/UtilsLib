@@ -4,6 +4,7 @@
 	{
 		void Add<TModel>(string pColName, int pId, TModel pModel);
 		void Add<TModel>(string pColName, Guid pId, TModel pModel);
+		void Create(string pColName);
 		void DeleteById(string pColName, int pId);
 		void DeleteById(string pColName, Guid pId);
 		void DeleteAll(string pColName);

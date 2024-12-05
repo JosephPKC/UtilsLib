@@ -41,6 +41,20 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 		}
 
 		/// <summary>
+		/// Creates a new collection.
+		/// </summary>
+		/// <param name="pColName"></param>
+		public void Create(string pColName)
+		{
+			log.Debug($"BEGIN: CREATE {pColName}.");
+
+			// LiteDb automatically creates a collection when retrieving it, if it does not already exist.
+			_ = _db.GetCollection(pColName);
+
+			log.Debug($"END: CREATE {pColName}.");
+		}
+
+		/// <summary>
 		/// Deletes an item by id.
 		/// </summary>
 		/// <param name="pColName"></param>
