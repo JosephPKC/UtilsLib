@@ -115,7 +115,7 @@ namespace LiteDbWrapper.Wrappers.SimpleLiteDbWrapper
 			IEnumerable<TModel> result = col.FindAll();
 
 			log.Debug($"END: GET ALL {pColName}.");
-			return (ICollection<TModel>)result;
+			return result.ToList();
 		}
 
 		/// <summary>
