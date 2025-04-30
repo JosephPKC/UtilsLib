@@ -1,0 +1,25 @@
+name: NuGet Api.PkmApi
+run-name: Build for PR ( ${{ github.event.number }} ${{ github.event.pull_request.title }}) by ${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - main
+    paths: 
+      - 'Api/PkmApi/**'
+
+jobs:
+  deploy-nuget-pkm-api:
+    uses: ./.github/workflows/rw-nuget.yaml
+    with:
+      pckg-name: JosephPKC.Api.PkmApi
+      sln-path: ./Api/PkmApi/PkmApi.sln
+      proj-path: ./Api/PkmApi/PkmApi/PkmApi.csproj
+    secrets: inherit
+  deploy-nuget-test-dtos:
+    uses: ./.github/workflows/rw-nuget.yaml
+    with:
+      pckg-name: JosephPKC.Api.PkmApi.TestDtos
+      sln-path: ./Api/PkmApi/PkmApi.sln
+      proj-path: ./Api/PkmApi/PkmApiTestDtos/PkmApiTestDtos.csproj
+    secrets: inherit
