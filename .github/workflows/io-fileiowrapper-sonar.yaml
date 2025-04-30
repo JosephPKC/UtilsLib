@@ -15,5 +15,4 @@ jobs:
     uses: ./.github/workflows/rw-sonar.yaml
     with:
       sln-file-path: ./IO/FileIOWrapper/FileIOWrapper.sln
-      test-dll-file-path: ./IO/FileIOWrapper/FileIOWrapper.Test/bin/Debug/net9.0/FileIOWrapper.Test.dll
     secrets: inherit

@@ -4,8 +4,6 @@ on:
     inputs:
       sln-file-path:
         type: string
-      test-dll-file-path:
-        type: string
 
 jobs:
   analyze:
@@ -39,9 +37,6 @@ jobs:
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
-      - name: Install coverlet
-        run: |
-          dotnet tool install --global coverlet.console
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -51,8 +46,5 @@ jobs:
           
           echo "Build solution"
           dotnet build ${{ inputs.sln-file-path }} --configuration Release --no-incremental
-          
-          echo "Run coverlet"
-          coverlet ${{ inputs.test-dll-file-path }} --target "dotnet" --targetargs "test --no-build" -f=opencover -o="coverage.xml"
           
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
