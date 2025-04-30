@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PkmApi.Test", "Api\PkmApi\P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PkmApiTester", "Api\PkmApi\PkmApiTester\PkmApiTester.csproj", "{AFCEA8CC-EA01-12AA-BA99-B0937EEBFD38}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisCache", "Store\RedisCache\RedisCache\RedisCache.csproj", "{A0F0EBA4-D1D0-0506-60A3-CEBF9C5ED491}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,10 @@ Global
 		{AFCEA8CC-EA01-12AA-BA99-B0937EEBFD38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFCEA8CC-EA01-12AA-BA99-B0937EEBFD38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFCEA8CC-EA01-12AA-BA99-B0937EEBFD38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0F0EBA4-D1D0-0506-60A3-CEBF9C5ED491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0F0EBA4-D1D0-0506-60A3-CEBF9C5ED491}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0F0EBA4-D1D0-0506-60A3-CEBF9C5ED491}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0F0EBA4-D1D0-0506-60A3-CEBF9C5ED491}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -147,6 +153,7 @@ Global
 		{D0141936-7F45-A838-5B49-8918FAD05B45} = {E81A9B4D-B018-4DFD-9D1E-2E1CC678C3F8}
 		{485DC875-68CF-2A86-881E-114581F2FBDA} = {5350A897-3DCD-4D8D-904C-2E8D4F2DE5F9}
 		{AFCEA8CC-EA01-12AA-BA99-B0937EEBFD38} = {E81A9B4D-B018-4DFD-9D1E-2E1CC678C3F8}
+		{A0F0EBA4-D1D0-0506-60A3-CEBF9C5ED491} = {44E5005F-155A-400F-9B11-D55525EBF44D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E85820DE-5788-4042-8AE1-EA44CC0FEA8A}
