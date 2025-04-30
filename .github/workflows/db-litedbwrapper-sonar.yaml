@@ -12,8 +12,8 @@ on:
   
 jobs:
   sonar-qube-analysis:
-    uses: ./.github/workflows/rw-sonar.yaml
+    uses: ./.github/workflows/rw-sonar-cover.yaml
     with:
       sln-file-path: ./Db/LiteDbWrapper/LiteDbWrapper.sln
-      test-dll-file-path: ./Db/LiteDbWrapper/LiteDbWrapper.Test/bin/Debug/net9.0/LiteDbWrapper.Test.dll
+      test-dll-file-path: ./Db/LiteDbWrapper/LiteDbWrapper.Test/bin/Release/net9.0/LiteDbWrapper.Test.dll
     secrets: inherit
