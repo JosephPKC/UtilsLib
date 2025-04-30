@@ -50,7 +50,7 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"JosephPKC_PokemonGuesser" /o:"josephpkc" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=coverage.xml
           
           echo "Build solution"
-          dotnet build ${{ inputs.sln-file-path }} --no-incremental
+          dotnet build ${{ inputs.sln-file-path }} --configuration Release --no-incremental
           
           echo "Run coverlet"
           coverlet ${{ inputs.test-dll-file-path }} --target "dotnet" --targetargs "test --no-build" -f=opencover -o="coverage.xml"
