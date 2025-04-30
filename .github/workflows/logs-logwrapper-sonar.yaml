@@ -15,4 +15,5 @@ jobs:
     uses: ./.github/workflows/rw-sonar.yaml
     with:
       sln-file-path: ./Logs/LogWrapper/LogWrapper.sln
+      test-dll-file-path: ./Logs/LogWrapper/LogWrapper.Test/bin/Debug/net9.0/LogWrapper.Test.dll
     secrets: inherit

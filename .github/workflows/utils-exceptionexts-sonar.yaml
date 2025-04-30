@@ -15,4 +15,5 @@ jobs:
     uses: ./.github/workflows/rw-sonar.yaml
     with:
       sln-file-path: ./Utils/ExceptionExts/ExceptionExts.sln
+      test-dll-file-path: ./Utils/ExceptionExts/ExceptionExts.Test/bin/Debug/net9.0/ExceptionExts.Test.dll
     secrets: inherit

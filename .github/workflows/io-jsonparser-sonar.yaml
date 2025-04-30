@@ -15,4 +15,5 @@ jobs:
     uses: ./.github/workflows/rw-sonar.yaml
     with:
       sln-file-path: ./IO/JsonParser/JsonParser.sln
+      test-dll-file-path: ./IO/JsonParser/JsonParser.Test/bin/Debug/net9.0/JsonParser.Test.dll
     secrets: inherit

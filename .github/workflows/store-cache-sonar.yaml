@@ -15,4 +15,5 @@ jobs:
     uses: ./.github/workflows/rw-sonar.yaml
     with:
       sln-file-path: ./Store/Cache/Cache.sln
+      test-dll-file-path: ./Store/Cache/Cache.Test/bin/Debug/net9.0/Cache.Test.dll
     secrets: inherit
