@@ -15,5 +15,5 @@ jobs:
     uses: ./.github/workflows/rw-sonar-cover.yaml
     with:
       sln-file-path: ./Db/SQLiteDbWrapper/SQLiteDbWrapper.sln
-      test-dll-file-path: ./Db/SQLiteDbWrapper/SQLiteDbWrapper.Test/bin/Debug/net9.0/SqliteDbWrapper.Test.dll
+      test-dll-file-path: ./Db/SQLiteDbWrapper/SQLiteDbWrapper.Test/bin/Release/net9.0/SqliteDbWrapper.Test.dll
     secrets: inherit
