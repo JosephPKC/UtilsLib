@@ -12,8 +12,8 @@ on:
   
 jobs:
   sonar-qube-analysis:
-    uses: ./.github/workflows/rw-sonar.yaml
+    uses: ./.github/workflows/rw-sonar-cover.yaml
     with:
       sln-file-path: ./Utils/ExceptionExts/ExceptionExts.sln
-      test-dll-file-path: ./Utils/ExceptionExts/ExceptionExts.Test/bin/Debug/net9.0/ExceptionExts.Test.dll
+      test-dll-file-path: ./Utils/ExceptionExts/ExceptionExts.Test/bin/Releas/net9.0/ExceptionExts.Test.dll
     secrets: inherit
