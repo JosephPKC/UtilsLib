@@ -5,7 +5,7 @@ using LogWrapper.Loggers.SimpleConsole;
 
 namespace LogWrapper.Test
 {
-    public class Program
+    public static class Program
 	{
 		/* Console Tests */
 		public static void Main(string[] args)

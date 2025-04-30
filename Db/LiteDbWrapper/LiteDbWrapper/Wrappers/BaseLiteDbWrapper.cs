@@ -9,13 +9,13 @@ namespace LiteDbWrapper.Wrappers
 		protected readonly ILogger log;
 		protected readonly ILiteDatabase _db;
 
-		public BaseLiteDbWrapper(string pDbPath, ILogger pLogger)
+		protected BaseLiteDbWrapper(string pDbPath, ILogger pLogger)
 		{
 			_db = new LiteDatabase(pDbPath);
 			log = pLogger;
 		}
 
-		public BaseLiteDbWrapper(ILiteDatabase pDb, ILogger pLogger)
+        protected BaseLiteDbWrapper(ILiteDatabase pDb, ILogger pLogger)
 		{
 			_db = pDb;
 			log = pLogger;

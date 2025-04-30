@@ -6,14 +6,13 @@ using log4net.Repository.Hierarchy;
 
 namespace LogWrapper.Loggers.Log4Net
 {
-    internal abstract class BaseLog4NetLogger : BaseLogger
+    internal abstract class BaseLog4NetLogger(Type pDeclaringType) : BaseLogger(pDeclaringType)
     {
         protected static readonly string[] _levels = ["DEBUG", "ERROR", "FATAL", "INFO", "WARN"];
-        protected readonly ILog _log;
+        protected readonly ILog _log = LogManager.GetLogger(pDeclaringType);
 
-        public BaseLog4NetLogger(Type pDeclaringType) : base(pDeclaringType)
+        protected void SetupLogger()
         {
-            _log = LogManager.GetLogger(pDeclaringType);
             PatternLayout layout = GetPatternLayout();
             IAppender appender = GetAppender(layout);
             SetHierarchy(Level.Debug, appender);

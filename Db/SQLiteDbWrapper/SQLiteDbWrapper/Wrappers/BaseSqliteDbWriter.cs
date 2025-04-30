@@ -21,8 +21,9 @@ namespace SqliteDbWrapper.Wrappers
 				_sqlite.Open();
 				command.ExecuteNonQuery();
 			}
-			catch
+			catch (Exception ex)
 			{
+				log.Error(ex.Message);
 				throw;
 			}
 			finally

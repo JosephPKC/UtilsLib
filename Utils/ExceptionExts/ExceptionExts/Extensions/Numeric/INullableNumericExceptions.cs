@@ -1,6 +1,6 @@
 ﻿namespace ExceptionExts.Extensions.Numeric
 {
-    public interface INullableNumericExceptions<TNum>
+    public interface INullableNumericExceptions
     {
         void NullOrNegative();
     }
