@@ -6,13 +6,13 @@ on:
     branches:
       - main
     paths: 
-      - 'Db/SqliteDbWrapper/**'
+      - 'Db/SQLiteDbWrapper/**'
 
 jobs:
   deploy-nuget:
     uses: ./.github/workflows/rw-nuget.yaml
     with:
       pckg-name: JosephPKC.Db.SqliteDbWrapper
-      sln-path: ./Db/SqliteDbWrapper/SqliteDbWrapper.sln
-      proj-path: ./Db/SqliteDbWrapper/SqliteDbWrapper/SqliteDbWrapper.csproj
+      sln-path: ./Db/SQLiteDbWrapper/SQLiteDbWrapper.sln
+      proj-path: ./Db/SQLiteDbWrapper/SQLiteDbWrapper/SqliteDbWrapper.csproj
     secrets: inherit
