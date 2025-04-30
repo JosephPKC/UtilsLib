@@ -1,24 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<OutputType>Library</OutputType>
-	<TargetFramework>net9.0</TargetFramework>
-	<ImplicitUsings>enable</ImplicitUsings>
-	<Nullable>enable</Nullable>
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
-	<PackageId>JosephPKC.Db.LiteDbWrapper</PackageId>
-	<Version>1.0.0</Version>
-	<Authors>JosephPKC</Authors>
-	<Company>JosephPKC</Company>
-	<IsPackable>true</IsPackable>
-	<Title>JosephPKC.LiteDbWrapper</Title>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
+		<PackageId>JosephPKC.Db.LiteDbWrapper</PackageId>
+		<Version>1.0.1</Version>
+		<Authors>JosephPKC</Authors>
+		<Company>JosephPKC</Company>
+		<IsPackable>true</IsPackable>
+		<Title>JosephPKC.LiteDbWrapper</Title>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-	<None Include="README.md" Pack="true" PackagePath="\"/>
-	<PackageReference Include="JosephPKC.Logs.LogWrapper" Version="1.0.1" />
-	<PackageReference Include="LiteDB" Version="5.0.21" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\"/>
+		<PackageReference Include="JosephPKC.Logs.LogWrapper" Version="1.0.1" />
+		<PackageReference Include="LiteDB" Version="5.0.21" />
+	</ItemGroup>
 
 </Project>

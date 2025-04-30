@@ -5,17 +5,17 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 
-		<PackageId>JosephPKC.Db.SqliteDbWrapper</PackageId>
-		<Version>1.0.0</Version>
-		<Authors>JosephPKC</Authors>
-		<Company>JosephPKC</Company>
-		<IsPackable>true</IsPackable>
-		<Title>JosephPKC.SqliteDbWrapper</Title>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
+	    <PackageId>JosephPKC.Db.SqliteDbWrapper</PackageId>
+	    <Version>1.0.1</Version>
+	    <Authors>JosephPKC</Authors>
+	    <Company>JosephPKC</Company>
+	    <IsPackable>true</IsPackable>
+	    <Title>JosephPKC.SqliteDbWrapper</Title>
+	    <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
-		<None Include="README.md" Pack="true" PackagePath="\"/>
+	    <None Include="README.md" Pack="true" PackagePath="\"/>
         <PackageReference Include="JosephPKC.Logs.LogWrapper" Version="1.0.1" />
         <PackageReference Include="JosephPKC.Store.Cache" Version="1.0.0" />
         <PackageReference Include="JosephPKC.Utils.ExceptionExts" Version="1.0.0" />
@@ -23,9 +23,5 @@
         <PackageReference Include="System.Data.SQLite" Version="1.0.119" />
         <PackageReference Include="System.Drawing.Common" Version="4.7.2" />
     </ItemGroup>
-
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	    <Exec Command="xcopy /y /d &quot;$(ProjectDir)\obj\Release\net9.0\$(ProjectName).dll&quot; &quot;..\..\..\bin\&quot;" />
-    </Target>
 
 </Project>

@@ -1,30 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
-	<PackageId>JosephPKC.IO.JsonParser</PackageId>
-	<Version>1.0.0</Version>
-	<Authors>JosephPKC</Authors>
-	<Company>JosephPKC</Company>
-	<IsPackable>true</IsPackable>
-	<Title>JosephPKC.JsonParser</Title>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
+		<PackageId>JosephPKC.IO.JsonParser</PackageId>
+		<Version>1.0.1</Version>
+		<Authors>JosephPKC</Authors>
+		<Company>JosephPKC</Company>
+		<IsPackable>true</IsPackable>
+		<Title>JosephPKC.JsonParser</Title>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="JosephPKC.IO.FileIOWrapper" Version="1.0.0" />
-    <PackageReference Include="System.Text.Json" Version="9.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-	<None Include="README.md" Pack="true" PackagePath="\" />
-  </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y /d &quot;$(ProjectDir)\obj\Release\net9.0\$(ProjectName).dll&quot; &quot;..\..\..\bin\&quot;" />
-  </Target>
+	<ItemGroup>
+		<None Include="README.md" Pack="true" PackagePath="\" />
+		<PackageReference Include="JosephPKC.IO.FileIOWrapper" Version="1.0.0" />
+		<PackageReference Include="System.Text.Json" Version="9.0.4" />
+	</ItemGroup>
 
 </Project>
