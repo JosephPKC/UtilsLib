@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+	<PackageId>JosephPKC.Logs.LogWrapper</PackageId>
+	<Version>1.0.1</Version>
+	<Authors>JosephPKC</Authors>
+	<Company>JosephPKC</Company>
+	<IsPackable>true</IsPackable>
+	<Title>JosephPKC.LogWrapper</Title>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="3.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<None Include="README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="xcopy /y /d &quot;$(ProjectDir)\obj\Release\net9.0\$(ProjectName).dll&quot; &quot;..\..\..\bin\&quot;" />
+  </Target>
+</Project>
