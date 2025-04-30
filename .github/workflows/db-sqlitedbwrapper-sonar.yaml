@@ -8,11 +8,12 @@ on:
       - reopened
       - synchronize
     paths:
-      - 'Db/SqliteDbWrapper/**'
+      - 'Db/SQLiteDbWrapper/**'
   
 jobs:
   sonar-qube-analysis:
-    uses: ./.github/workflows/rw-sonar.yaml
+    uses: ./.github/workflows/rw-sonar-cover.yaml
     with:
-      sln-file-path: ./Db/SqliteDbWrapper/SqliteDbWrapper.sln
+      sln-file-path: ./Db/SQLiteDbWrapper/SQLiteDbWrapper.sln
+      test-dll-file-path: ./Db/SQLiteDbWrapper/SQLiteDbWrapper.Test/bin/Release/net9.0/SqliteDbWrapper.Test.dll
     secrets: inherit

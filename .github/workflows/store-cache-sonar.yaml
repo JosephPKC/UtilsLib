@@ -12,7 +12,8 @@ on:
   
 jobs:
   sonar-qube-analysis:
-    uses: ./.github/workflows/rw-sonar.yaml
+    uses: ./.github/workflows/rw-sonar-cover.yaml
     with:
       sln-file-path: ./Store/Cache/Cache.sln
+      test-dll-file-path: ./Store/Cache/Cache.Test/bin/Release/net9.0/Cache.Test.dll
     secrets: inherit
