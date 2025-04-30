@@ -7,8 +7,13 @@ namespace LogWrapper.Loggers.Log4Net.ColorConsole
     /// Simple wrapper for the log4net logger.
     /// Centralizes the configuration and color codes the log levels.
     /// </summary>
-    internal class ColorConsoleLogger(Type pDeclaringType) : BaseLog4NetLogger(pDeclaringType)
+    internal class ColorConsoleLogger : BaseLog4NetLogger
     {
+        public ColorConsoleLogger(Type pDeclaringType) : base(pDeclaringType)
+        {
+            SetupLogger();
+        }
+
         #region BaseLogger
         public override void Debug(object? pMessage)
         {

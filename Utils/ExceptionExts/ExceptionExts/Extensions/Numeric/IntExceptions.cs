@@ -1,10 +1,10 @@
 ﻿namespace ExceptionExts.Extensions.Numeric
 {
-    internal class IntExceptions(string pArgName, int pNumeric) : BaseArgExceptions(pArgName), INumericExceptions<int>
+    internal class IntExceptions(string pArgName, int pNumeric) : BaseArgExceptions(pArgName), INumericExceptions
     {
         private readonly int _numeric = pNumeric;
 
-        #region IntExceptions
+        #region INumericExceptions
         public void Negative()
         {
             if (_numeric < 0)

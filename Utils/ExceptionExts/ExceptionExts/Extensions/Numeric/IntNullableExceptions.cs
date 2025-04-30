@@ -1,10 +1,10 @@
 ﻿namespace ExceptionExts.Extensions.Numeric
 {
-    internal class IntNullableExceptions(string pArgName, int? pNumeric) : BaseArgExceptions(pArgName), INullableNumericExceptions<int?>
+    internal class IntNullableExceptions(string pArgName, int? pNumeric) : BaseArgExceptions(pArgName), INullableNumericExceptions
     {
         private readonly int? _numeric = pNumeric;
 
-        #region IntExceptions
+        #region INullableNumericExceptions
         public void NullOrNegative()
         {
             if (_numeric is null || _numeric < 0)

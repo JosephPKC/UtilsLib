@@ -38,8 +38,9 @@ namespace SqliteDbWrapper.Wrappers
 				// Store will either create a new entry or update the existing entry.
 				_cache.Put(pQuery, items, 0);
 			}
-			catch
+			catch (Exception ex)
 			{
+				log.Error(ex.Message);
 				throw;
 			}
 			finally

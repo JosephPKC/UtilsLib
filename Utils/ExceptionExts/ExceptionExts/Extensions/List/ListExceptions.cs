@@ -1,10 +1,10 @@
 ﻿namespace ExceptionExts.Extensions.List
 {
-    internal class ListExceptions<TValue>(string pArgName, ICollection<TValue>? pCol) : BaseArgExceptions(pArgName), IListExceptions<TValue>
+    internal class ListExceptions<TValue>(string pArgName, ICollection<TValue>? pCol) : BaseArgExceptions(pArgName), IListExceptions
     {
         private readonly ICollection<TValue>? _col = pCol;
 
-        #region IListExceptions<TValue>
+        #region IListExceptions
         public void NullOrEmpty()
         {
             if (_col is null || _col.Count == 0)
