@@ -1,0 +1,18 @@
+name: NuGet IO.JsonParser
+run-name: Build for PR ( ${{ github.event.number }} ${{ github.event.pull_request.title }}) by ${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - main
+    paths: 
+      - 'IO/JsonParser/**'
+
+jobs:
+  deploy-nuget:
+    uses: ./.github/workflows/rw-nuget.yaml
+    with:
+      pckg-name: JosephPKC.IO.JsonParser
+      sln-path: ./IO/JsonParser/JsonParser.sln
+      proj-path: ./IO/JsonParser/JsonParser/JsonParser.csproj
+    secrets: inherit

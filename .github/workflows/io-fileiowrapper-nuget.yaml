@@ -1,0 +1,18 @@
+name: NuGet IO.FileIOWrapper
+run-name: Build for PR ( ${{ github.event.number }} ${{ github.event.pull_request.title }}) by ${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - main
+    paths: 
+      - 'IO/FileIOWrapper/**'
+
+jobs:
+  deploy-nuget:
+    uses: ./.github/workflows/rw-nuget.yaml
+    with:
+      pckg-name: JosephPKC.IO.FileIOWrapper
+      sln-path: ./IO/FileIOWrapper/FileIOWrapper.sln
+      proj-path: ./IO/FileIOWrapper/FileIOWrapper/FileIOWrapper.csproj
+    secrets: inherit

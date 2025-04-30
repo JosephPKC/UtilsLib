@@ -1,0 +1,18 @@
+name: NuGet Utils.ExceptionExts
+run-name: Build for PR ( ${{ github.event.number }} ${{ github.event.pull_request.title }}) by ${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - main
+    paths: 
+      - 'Utils/ExceptionExts/**'
+
+jobs:
+  deploy-nuget:
+    uses: ./.github/workflows/rw-nuget.yaml
+    with:
+      pckg-name: JosephPKC.Utils.ExceptionExts
+      sln-path: ./Utils/ExceptionExts/ExceptionExts.sln
+      proj-path: ./Utils/ExceptionExts/ExceptionExts/ExceptionExts.csproj
+    secrets: inherit

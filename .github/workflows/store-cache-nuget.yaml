@@ -1,0 +1,18 @@
+name: NuGet Store.Cache
+run-name: Build for PR ( ${{ github.event.number }} ${{ github.event.pull_request.title }}) by ${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - main
+    paths: 
+      - 'Store/Cache/**'
+
+jobs:
+  deploy-nuget:
+    uses: ./.github/workflows/rw-nuget.yaml
+    with:
+      pckg-name: JosephPKC.Store.Cache
+      sln-path: ./Store/Cache/Cache.sln
+      proj-path: ./Store/Cache/Cache/Cache.csproj
+    secrets: inherit
