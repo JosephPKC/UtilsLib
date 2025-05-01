@@ -1,7 +1,7 @@
 ﻿using NRedisStack.RedisStackCommands;
 using StackExchange.Redis;
 
-namespace RedisCache.Redis
+namespace RedisCache
 {
     //  A basic handler that makes common usage easier.
     internal class RedisDbHandler(IConnectionMultiplexer pConnMulti, string pPrefixPath) : IRedisHandler

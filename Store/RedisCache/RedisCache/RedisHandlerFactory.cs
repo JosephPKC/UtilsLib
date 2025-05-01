@@ -1,6 +1,6 @@
 ﻿using StackExchange.Redis;
 
-namespace RedisCache.Redis
+namespace RedisCache
 {
     public static class RedisHandlerFactory
     {
