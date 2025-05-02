@@ -1,7 +1,7 @@
 ﻿using LiteDB;
 
+using LogWrapper;
 using LogWrapper.Loggers;
-using LogWrapper.Loggers.Log4Net.ColorConsole;
 
 using LiteDbWrapper.Wrappers;
 using LiteDbWrapper.Wrappers.SimpleLiteDb;
@@ -17,7 +17,7 @@ namespace LiteDbWrapper
 				ILogger customLogger = pCustomLogger.CreateNewLogger(typeof(SimpleLiteDbWrapper));
 				return new SimpleLiteDbWrapper(pDbPath, customLogger);
 			}
-			ILogger logger = new ColorConsoleLoggerFactory().CreateNewLogger(typeof(SimpleLiteDbWrapper));
+			ILogger logger = LogWrapperFactory.CreateColorConsoleLogger(typeof(SimpleLiteDbWrapper));
 			return new SimpleLiteDbWrapper(pDbPath, logger);
 		}
 

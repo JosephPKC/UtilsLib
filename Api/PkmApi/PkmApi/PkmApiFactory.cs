@@ -3,7 +3,6 @@ using Cache;
 using JsonParser.Parsers;
 using LogWrapper.Loggers;
 
-
 namespace PkmApi
 {
     public static class PkmApiFactory

@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
 
 	    <PackageId>JosephPKC.Db.SqliteDbWrapper</PackageId>
-	    <Version>1.0.1</Version>
+	    <Version>1.0.2</Version>
 	    <Authors>JosephPKC</Authors>
 	    <Company>JosephPKC</Company>
 	    <IsPackable>true</IsPackable>
@@ -16,7 +16,7 @@
 
     <ItemGroup>
 	    <None Include="README.md" Pack="true" PackagePath="\"/>
-        <PackageReference Include="JosephPKC.Logs.LogWrapper" Version="1.0.1" />
+        <PackageReference Include="JosephPKC.Logs.LogWrapper" Version="1.3.0" />
         <PackageReference Include="JosephPKC.Store.Cache" Version="1.0.0" />
         <PackageReference Include="JosephPKC.Utils.ExceptionExts" Version="1.0.0" />
         <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />

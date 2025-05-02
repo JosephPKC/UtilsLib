@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 
 using Cache;
+using LogWrapper;
 using LogWrapper.Loggers;
 using LogWrapper.Loggers.SimpleConsole;
 
@@ -18,7 +19,7 @@ namespace PkmApiTester
         public static void Main(string[] pArgs)
         {
             //  Create the Api
-            ILogger log = new SimpleConsoleLoggerFactory().CreateNewLogger(typeof(Program));
+            ILogger log = LogWrapperFactory.CreateSimpleConsoleLogger(typeof(Program));
             log.LogLevel = LogLevels.Info;
 
             IPkmApi api = PkmApiFactory.CreatePkmApi("v2", pLogger: log, pCacheFactory: CacheFacFactory.CreateStringCacheFactory());

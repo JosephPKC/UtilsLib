@@ -2,8 +2,8 @@
 using Cache;
 using JsonParser;
 using JsonParser.Parsers;
+using LogWrapper;
 using LogWrapper.Loggers;
-using LogWrapper.Loggers.Log4Net.ColorConsole;
 
 using PkmApi.Dtos;
 
@@ -15,9 +15,9 @@ namespace PkmApi.Endpoints
             ICacheFactory? pCacheFactory = null, int? pCacheSizeLimit = null, int? pCacheLifeInSec = null
             ) where TData : class, IPkmApiDto
         {
-            IApiGetter getter = ApiGetterFactory.CreateNewHttpGetter();
+            IApiGetter getter = pApiGetter ?? ApiGetterFactory.CreateNewHttpGetter();
             IStringParser parser = pJsonParser ?? JsonParserFactory.CreateTextJsonStringParser();
-            ILogger logger = pLogger ?? new ColorConsoleLoggerFactory().CreateNewLogger(typeof(BasePkmEndpointHandler<TData>));
+            ILogger logger = pLogger ?? LogWrapperFactory.CreateColorConsoleLogger(typeof(BasePkmEndpointHandler<TData>));
             ICacheFactory cacheFactory = pCacheFactory ?? CacheFacFactory.CreateStringCacheFactory();
             int? cacheSizeLimit = pCacheSizeLimit ?? Config.DefaultCacheSizeLimit;
             int? cacheLifeInSec = pCacheLifeInSec ?? Config.DefaultCacheLifeInSec;

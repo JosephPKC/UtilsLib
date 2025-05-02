@@ -3,8 +3,8 @@
 using FluentAssertions;
 
 using Cache;
+using LogWrapper;
 using LogWrapper.Loggers;
-using LogWrapper.Loggers.Null;
 
 using SqliteDbWrapper.Queries.SimpleSelectQuery;
 using SqliteDbWrapper.Readers;
@@ -28,7 +28,7 @@ namespace SqliteDbWrapper.Test.Wrappers
 			// Use the default SimpleCache
 
 			// Mock out the sqlite connection
-			ILogger logger = new NullLoggerFactory().CreateNewLogger(typeof(LoggedSqliteDbWrapperTest));
+			ILogger logger = LogWrapperFactory.CreateNullLogger(typeof(LoggedSqliteDbWrapperTest));
 			ICache<string, ICollection<TModel>> cache = new TestCache<ICollection<TModel>>();
 
 			return TestWrapperFactory.GetLoggedWrapper(pSqlite, cache, logger);

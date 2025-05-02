@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-
+using LogWrapper;
 using LogWrapper.Loggers.Null;
 
 using PkmApi.Dtos.Utility;
@@ -18,7 +18,7 @@ namespace PkmApi.Test.Endpoints
             {
                 DTOJsonType = pDTOTypeToTest
             };
-            return EndpointHandlerFactory.BuildEndpointHandler<BasicTestDto>("test-uri/api", "v1", "test-endpoint", getter, new BasicParser(), new NullLoggerFactory().CreateNewLogger(typeof(IEndpointHandler<BasicTestDto>)));
+            return EndpointHandlerFactory.BuildEndpointHandler<BasicTestDto>("test-uri/api", "v1", "test-endpoint", getter, new BasicParser(), LogWrapperFactory.CreateNullLogger(typeof(IEndpointHandler<BasicTestDto>)));
         }
         #endregion
 

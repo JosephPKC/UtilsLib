@@ -6,6 +6,7 @@ using LogWrapper.Loggers.Null;
 
 using LiteDbWrapper.Test.Fakes;
 using LiteDbWrapper.Wrappers;
+using LogWrapper;
 
 namespace LiteDbWrapper.Test.Wrappers
 {
@@ -41,7 +42,7 @@ namespace LiteDbWrapper.Test.Wrappers
 
 		private static ILiteDbWrapper CreateSimpleLiteDbWrapper(ILiteDatabase pDb)
 		{
-			ILogger logger = new NullLoggerFactory().CreateNewLogger(typeof(SimpleLiteDbWrapperTest));
+			ILogger logger = LogWrapperFactory.CreateNullLogger(typeof(SimpleLiteDbWrapperTest));
 			return LiteDbWrapperFactory.CreateNewWrapper(pDb, logger);
 		}
 
