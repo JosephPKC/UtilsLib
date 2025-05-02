@@ -1,7 +1,4 @@
 ﻿using LogWrapper.Loggers;
-using LogWrapper.Loggers.Log4Net.ColorConsole;
-using LogWrapper.Loggers.Null;
-using LogWrapper.Loggers.SimpleConsole;
 
 namespace LogWrapper.Test
 {
@@ -24,7 +21,7 @@ namespace LogWrapper.Test
 
 		private static void TestColorConsole()
 		{
-			ILogger log = new ColorConsoleLoggerFactory().CreateNewLogger(typeof(Program));
+			ILogger log = LoggerFacFactory.CreateColorConsoleLoggerFactory().CreateNewLogger(typeof(Program));
 			log.LogLevel = LogLevels.Debug;
 
 			log.Debug("THIS IS A DEBUG MESSAGE.");
@@ -36,7 +33,7 @@ namespace LogWrapper.Test
 
 		private static void TestNull()
 		{
-			ILogger log = new NullLoggerFactory().CreateNewLogger(typeof(Program));
+			ILogger log = LoggerFacFactory.CreateNullLoggerFactory().CreateNewLogger(typeof(Program));
             log.LogLevel = LogLevels.Debug;
 
             log.Debug("THIS IS A DEBUG MESSAGE.");
@@ -48,7 +45,7 @@ namespace LogWrapper.Test
 
 		private static void TestSimpleConsole()
 		{
-			ILogger log = new SimpleConsoleLoggerFactory().CreateNewLogger(typeof(Program));
+			ILogger log = LoggerFacFactory.CreateSimpleConsoleLoggerFactory().CreateNewLogger(typeof(Program));
             log.LogLevel = LogLevels.Debug;
 
             log.Debug("THIS IS A DEBUG MESSAGE.");

@@ -9,5 +9,6 @@ namespace LogWrapper
     {
         public required ILoggerFactory LoggerFactory { get; set; }
         public required Type DeclaringType { get; set; }
+        public LogLevels LogLevel { get; set; } = LogLevels.Info;
     }
 }

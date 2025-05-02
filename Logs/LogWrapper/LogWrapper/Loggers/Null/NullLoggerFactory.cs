@@ -1,9 +1,6 @@
-﻿
-using LogWrapper.Loggers.Log4Net.ColorConsole;
-
-namespace LogWrapper.Loggers.Null
+﻿namespace LogWrapper.Loggers.Null
 {
-	public class NullLoggerFactory : ILoggerFactory
+	internal class NullLoggerFactory : ILoggerFactory
 	{
 		#region ILoggerFactory
 		public ILogger CreateNewLogger(Type pDeclaringType)

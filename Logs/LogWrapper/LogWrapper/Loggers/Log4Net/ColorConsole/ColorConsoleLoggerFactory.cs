@@ -1,6 +1,6 @@
 namespace LogWrapper.Loggers.Log4Net.ColorConsole
 {
-    public class ColorConsoleLoggerFactory : ILoggerFactory
+    internal class ColorConsoleLoggerFactory : ILoggerFactory
     {
         #region ILoggerFactory
         public ILogger CreateNewLogger(Type pDeclaringType)
