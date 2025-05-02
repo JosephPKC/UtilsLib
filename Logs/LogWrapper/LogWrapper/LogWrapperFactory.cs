@@ -5,24 +5,36 @@ using LogWrapper.Loggers.SimpleConsole;
 
 namespace LogWrapper
 {
-    /// <summary>
-    /// Allows clients to construct loggers.
-    /// </summary>
     public static class LogWrapperFactory 
 	{
-		public static ILogger CreateColorConsoleLogger(Type pDeclaringType)
+		public static ILogger CreateColorConsoleLogger(Type pDeclaringType, LogLevels? pLogLevel = null)
 		{
-			return new ColorConsoleLoggerFactory().CreateNewLogger(pDeclaringType);
+			ILogger logger = new ColorConsoleLoggerFactory().CreateNewLogger(pDeclaringType);
+			if (pLogLevel is not null)
+			{
+				logger.LogLevel = pLogLevel.Value;
+			}
+			return logger;
 		}
 
-		public static ILogger CreateNullLogger(Type pDeclaringType)
+		public static ILogger CreateNullLogger(Type pDeclaringType, LogLevels? pLogLevel = null)
 		{
-			return new NullLoggerFactory().CreateNewLogger(pDeclaringType);
-		}
+            ILogger logger = new NullLoggerFactory().CreateNewLogger(pDeclaringType);
+            if (pLogLevel is not null)
+            {
+                logger.LogLevel = pLogLevel.Value;
+            }
+            return logger;
+        }
 
-		public static ILogger CreateSimpleConsoleLogger(Type pDeclaringType)
+		public static ILogger CreateSimpleConsoleLogger(Type pDeclaringType, LogLevels? pLogLevel = null)
 		{
-			return new SimpleConsoleLoggerFactory().CreateNewLogger(pDeclaringType);
-		}
+            ILogger logger = new SimpleConsoleLoggerFactory().CreateNewLogger(pDeclaringType);
+            if (pLogLevel is not null)
+            {
+                logger.LogLevel = pLogLevel.Value;
+            }
+            return logger;
+        }
 	}
 }

@@ -1,15 +1,23 @@
 
+using LogWrapper.Loggers.Log4Net.ColorConsole;
+
 namespace LogWrapper.Loggers.SimpleConsole
 {
-    /// <summary>
-    /// Constructs a SimpleConsoleLogger
-    /// </summary>
     public class SimpleConsoleLoggerFactory : ILoggerFactory
     {
-        #region "ILoggerFactory"
+        #region ILoggerFactory
         public ILogger CreateNewLogger(Type pDeclaringType)
         {
             return new SimpleConsoleLogger(pDeclaringType);
+        }
+
+        public ILogger CreateNewLogger(Type pDeclaringType, LogLevels pLogLevel)
+        {
+            SimpleConsoleLogger logger = new(pDeclaringType)
+            {
+                LogLevel = pLogLevel
+            };
+            return logger;
         }
         #endregion
     }

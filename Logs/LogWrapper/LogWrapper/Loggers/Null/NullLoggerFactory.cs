@@ -1,17 +1,25 @@
 ﻿
+using LogWrapper.Loggers.Log4Net.ColorConsole;
+
 namespace LogWrapper.Loggers.Null
 {
-	/// <summary>
-	/// Constructs a NullLogger.
-	/// </summary>
 	public class NullLoggerFactory : ILoggerFactory
 	{
-		#region "ILoggerFactory"
+		#region ILoggerFactory
 		public ILogger CreateNewLogger(Type pDeclaringType)
 		{
 			return new NullLogger(pDeclaringType);
 		}
-		#endregion
 
-	}
+        public ILogger CreateNewLogger(Type pDeclaringType, LogLevels pLogLevel)
+        {
+            NullLogger logger = new(pDeclaringType)
+            {
+                LogLevel = pLogLevel
+            };
+            return logger;
+        }
+        #endregion
+
+    }
 }

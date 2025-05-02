@@ -6,5 +6,6 @@
     public interface ILoggerFactory
     {
         ILogger CreateNewLogger(Type pDeclaringType);
+        ILogger CreateNewLogger(Type pDeclaringType, LogLevels pLogLevel);
     }
 }
